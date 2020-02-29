@@ -25,5 +25,12 @@ module.exports = {
 		}
 	},
 	plugins: ['react', '@typescript-eslint'],
-	rules: { 'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }] }
+	rules: {
+		'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+		'import/extensions': [
+			'error',
+			'ignorePackages',
+			{ js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'never' }
+		]
+	}
 };
