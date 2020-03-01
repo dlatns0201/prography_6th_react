@@ -7,8 +7,9 @@ interface ButtonProps {
 	flex?: number | 'auto';
 	color?: string;
 	size?: 'small' | 'normal' | 'big';
-	type: 'route' | 'button';
-	url: string;
+	type?: 'route' | 'button';
+	url?: string;
+	style?: any;
 	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -38,11 +39,11 @@ const StyledButton = (styled.button`
 interface IInnerContent {
 	type: 'route' | 'button';
 	children: React.ReactNode;
-	url: string;
+	url?: string;
 }
 
 const innerContent = ({ type, children, url }: IInnerContent): React.ReactNode => {
-	if (type === 'route')
+	if (type === 'route' && url)
 		return (
 			<Link to={url} className="route">
 				{children}
@@ -51,9 +52,17 @@ const innerContent = ({ type, children, url }: IInnerContent): React.ReactNode =
 	if (type === 'button') return children;
 	return null;
 };
-const Button = ({ children, flex = 'auto', color = 'black', size = 'normal', type = 'button', url }: ButtonProps) => {
+const Button = ({
+	children,
+	flex = 'auto',
+	color = 'black',
+	size = 'normal',
+	type = 'button',
+	url,
+	style
+}: ButtonProps) => {
 	return (
-		<StyledButton flex={flex} color={color} size={size}>
+		<StyledButton flex={flex} color={color} size={size} style={style}>
 			{innerContent({ type, children, url })}
 		</StyledButton>
 	);
