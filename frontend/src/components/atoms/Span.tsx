@@ -9,10 +9,12 @@ const fontSizeType = {
 } as const;
 
 interface SpanProps {
-	children: React.ReactChildren;
+	children?: React.ReactChildren;
 	color?: string;
 	fontSize?: 'small' | 'normal' | 'big' | 'title' | number;
 	textAlign?: 'left' | 'right' | 'center';
+	width?: string;
+	height?: string;
 }
 
 const StyledSpan = styled.span`
@@ -20,11 +22,20 @@ const StyledSpan = styled.span`
 	font-size: ${(props: SpanProps) =>
 		typeof props.fontSize === 'number' ? `${props.fontSize}rem` : fontSizeType[props.fontSize!]};
 	text-align: ${(props: SpanProps) => props.textAlign};
+	width: ${props => props.width};
+	height: ${props => props.height};
 `;
 
-const Span = ({ children, color, fontSize, textAlign }: SpanProps) => {
+const Span = ({
+	children,
+	color = 'inherit',
+	fontSize = 'normal',
+	textAlign = 'left',
+	width = 'auto',
+	height = 'auto'
+}: SpanProps) => {
 	return (
-		<StyledSpan color={color} fontSize={fontSize} textAlign={textAlign}>
+		<StyledSpan color={color} fontSize={fontSize} textAlign={textAlign} width={width} height={height}>
 			{children}
 		</StyledSpan>
 	);
