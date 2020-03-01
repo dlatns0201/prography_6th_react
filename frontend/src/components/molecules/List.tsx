@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ListProps {
-	children: React.ReactChildren;
+	children?: React.ReactChildren;
 }
 
 const StyledList = styled.ul`

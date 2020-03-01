@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface FormProps {
-	children: React.ReactChildren;
-	flexDirection: 'column' | 'row';
-	justifyContent: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
-	alignItems: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
-	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	children?: React.ReactChildren;
+	flexDirection?: 'column' | 'row';
+	justifyContent?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
+	alignItems?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
+	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const StyledForm = styled.form`

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ButtonListProps {
-	children: React.ReactChildren;
+	children?: React.ReactChildren;
 }
 
 const StyledButtonList = styled.div`

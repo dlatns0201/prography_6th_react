@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-	children: React.ReactChildren;
-	flex: number | 'auto';
-	color: string;
-	size: 'small' | 'normal' | 'big';
+	children?: React.ReactChildren;
+	flex?: number | 'auto';
+	color?: string;
+	size?: 'small' | 'normal' | 'big';
 }
 
 const Size = {
@@ -20,8 +20,8 @@ const StyledButton = styled.button`
 	flex: ${(props: ButtonProps) => props.flex};
 	color: ${(props: ButtonProps) => props.color};
 	${(props: ButtonProps) => css`
-		padding: ${Size[props.size][0]} ${Size[props.size][1]};
-		font-size: Size[props.size][2];
+		padding: ${Size[props.size!][0]} ${Size[props.size!][1]};
+		font-size: ${Size[props.size!][2]};
 	`}
 `;
 

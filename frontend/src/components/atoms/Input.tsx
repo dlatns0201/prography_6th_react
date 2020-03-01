@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
-	children: React.ReactChildren;
-	placeholder: string;
+	children?: React.ReactChildren;
+	placeholder?: string;
 }
 
 const StyledInput = styled.span`

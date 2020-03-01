@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import Span from '../atoms/Span';
 
 interface TitleProps {
-	children: React.ReactChildren;
-	color: string;
+	children?: React.ReactChildren;
+	color?: string;
 }
 
 const StyledTitle = styled.div`
