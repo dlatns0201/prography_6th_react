@@ -13,12 +13,13 @@ const StyledTitle = styled.div`
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
+	color: ${props => props.color};
 `;
 
 const Title = ({ children, color = 'inherit' }: TitleProps) => {
 	return (
 		<StyledTitle color={color}>
-			<Span width="100%" textAlign="center">
+			<Span width="100%" textAlign="center" fontSize="title">
 				{children}
 			</Span>
 		</StyledTitle>

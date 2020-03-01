@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import Title from '../molecules/Title';
 
-interface TodoContentProps {
-	children?: React.ReactChildren;
-}
+interface TodoContentProps {}
 
 const StyledTodoContent = styled.div`
-	min-width: 50%;
+	min-width: 60%;
 `;
 
-const TodoContent = ({ children }: TodoContentProps) => {
-	return <StyledTodoContent>{children}</StyledTodoContent>;
+const TodoContent = () => {
+	return (
+		<StyledTodoContent>
+			<Title color="#FDA7DF">Todos</Title>
+		</StyledTodoContent>
+	);
 };
 
 export default TodoContent;
