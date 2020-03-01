@@ -23,7 +23,7 @@ const TodoContent = () => {
 			<Form flexDirection="column">
 				<Input placeholder="무엇을 해야하나요?" todo />
 			</Form>
-			<List white>
+			<List white listHeight="66px">
 				<ListItem>abc</ListItem>
 				<ListItem>123</ListItem>
 			</List>

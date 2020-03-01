@@ -5,6 +5,7 @@ import cn from 'classnames';
 interface ListProps {
 	children?: React.ReactNode;
 	white?: boolean;
+	listHeight?: string;
 }
 
 const StyledList = styled.ul<ListProps>`
@@ -15,10 +16,18 @@ const StyledList = styled.ul<ListProps>`
 	&.white {
 		background-color: white;
 	}
+
+	& > * {
+		height: ${props => props.listHeight};
+	}
 `;
 
-const List = ({ children: items, white }: ListProps) => {
-	return <StyledList className={cn({ white })}>{items}</StyledList>;
+const List = ({ children: items, white, listHeight = 'auto' }: ListProps) => {
+	return (
+		<StyledList className={cn({ white })} listHeight={listHeight}>
+			{items}
+		</StyledList>
+	);
 };
 
 export default List;
