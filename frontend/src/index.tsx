@@ -9,6 +9,14 @@ const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
     }
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+        }
+    }
 `;
 
 ReactDOM.render(
