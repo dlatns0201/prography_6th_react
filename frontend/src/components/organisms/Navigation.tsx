@@ -5,7 +5,10 @@ interface NavigationProps {
 	children: React.ReactChildren;
 }
 
-const StyledNavigation = styled.div``;
+const StyledNavigation = styled.div`
+	width: 100vw;
+	display: flex;
+`;
 
 const Navigation = ({ children }: NavigationProps) => {
 	return <StyledNavigation>{children}</StyledNavigation>;

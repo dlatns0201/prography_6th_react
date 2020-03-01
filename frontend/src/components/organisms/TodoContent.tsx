@@ -5,7 +5,9 @@ interface TodoContentProps {
 	children: React.ReactChildren;
 }
 
-const StyledTodoContent = styled.div``;
+const StyledTodoContent = styled.div`
+	min-width: 50%;
+`;
 
 const TodoContent = ({ children }: TodoContentProps) => {
 	return <StyledTodoContent>{children}</StyledTodoContent>;
