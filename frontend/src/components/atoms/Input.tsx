@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 interface InputProps {
 	children: React.ReactChildren;
+	placeholder: string;
 }
 
-const StyledInput = styled.span``;
+const StyledInput = styled.span`
+	flex: 1;
+`;
 
-const Input = ({ children }: InputProps) => {
-	return <StyledInput>{children}</StyledInput>;
+const Input = ({ children, placeholder }: InputProps) => {
+	return <StyledInput placeholder={placeholder}>{children}</StyledInput>;
 };
 
 export default Input;
