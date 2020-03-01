@@ -25,7 +25,6 @@ module.exports = {
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
-			filename: 'index.html',
 			template: 'public/index.html'
 		})
 	]
