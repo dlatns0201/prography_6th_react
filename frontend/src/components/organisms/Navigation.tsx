@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface NavigationProps {
-	children?: React.ReactChildren;
-}
+interface NavigationProps {}
 
 const StyledNavigation = styled.div`
 	width: 100vw;
 	display: flex;
 `;
 
-const Navigation = ({ children }: NavigationProps) => {
-	return <StyledNavigation>{children}</StyledNavigation>;
+const Navigation = () => {
+	return <StyledNavigation />;
 };
 
 export default Navigation;
