@@ -3,12 +3,36 @@ import styled from 'styled-components';
 
 interface FormProps {
 	children: React.ReactChildren;
+	flexDirection: 'column' | 'row';
+	justifyContent: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
+	alignItems: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
+	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const StyledForm = styled.form``;
+const StyledForm = styled.form`
+	display: flex;
+	flex-direction: ${(props: FormProps) => props.flexDirection};
+	justify-content: ${(props: FormProps) => props.justifyContent};
+	align-items: ${(props: FormProps) => props.alignItems};
+`;
 
-const Form = ({ children }: FormProps) => {
-	return <StyledForm>{children}</StyledForm>;
+const Form = ({
+	children,
+	flexDirection = 'row',
+	justifyContent = 'flex-start',
+	alignItems = 'flex-start',
+	onSubmit
+}: FormProps) => {
+	return (
+		<StyledForm
+			flexDirection={flexDirection}
+			justifyContent={justifyContent}
+			alignItems={alignItems}
+			onSubmit={onSubmit}
+		>
+			{children}
+		</StyledForm>
+	);
 };
 
 export default Form;
