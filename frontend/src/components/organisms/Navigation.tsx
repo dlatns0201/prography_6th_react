@@ -20,8 +20,12 @@ const Navigation = () => {
 		<StyledNavigation>
 			<Title>임태현</Title>
 			<ButtonList>
-				<Button>Todo</Button>
-				<Button>Movie</Button>
+				<Button type="route" url="/">
+					Todo
+				</Button>
+				<Button type="route" url="/movie">
+					Movie
+				</Button>
 			</ButtonList>
 		</StyledNavigation>
 	);
