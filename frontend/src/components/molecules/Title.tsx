@@ -9,7 +9,10 @@ interface TitleProps {
 }
 
 const StyledTitle = styled.div`
-	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
 `;
 
 const Title = ({ children, color = 'inherit' }: TitleProps) => {
