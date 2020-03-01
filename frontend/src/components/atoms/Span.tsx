@@ -8,9 +8,10 @@ interface SpanProps {
 	textAlign?: 'left' | 'right' | 'center';
 	width?: string;
 	height?: string;
+	className?: string;
 }
 
-const StyledSpan = styled.span`
+const StyledSpan = styled.span<SpanProps>`
 	color: ${(props: SpanProps) => props.color || 'black'};
 	font-size: ${(props: SpanProps) => props.fontSize};
 	text-align: ${(props: SpanProps) => props.textAlign};
@@ -24,10 +25,18 @@ const Span = ({
 	fontSize = 'inherit',
 	textAlign = 'left',
 	width = 'auto',
-	height = 'auto'
+	height = 'auto',
+	className
 }: SpanProps) => {
 	return (
-		<StyledSpan color={color} fontSize={fontSize} textAlign={textAlign} width={width} height={height}>
+		<StyledSpan
+			color={color}
+			fontSize={fontSize}
+			textAlign={textAlign}
+			width={width}
+			height={height}
+			className={className}
+		>
 			{children}
 		</StyledSpan>
 	);
