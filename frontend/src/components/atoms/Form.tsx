@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface FormProps {
-	children?: React.ReactChildren;
+	children?: React.ReactNode;
 	flexDirection?: 'column' | 'row';
 	justifyContent?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
 	alignItems?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
@@ -11,9 +11,8 @@ interface FormProps {
 
 const StyledForm = styled.form`
 	display: flex;
-	flex-direction: ${(props: FormProps) => props.flexDirection};
+	flex-direction: column;
 	justify-content: ${(props: FormProps) => props.justifyContent};
-	align-items: ${(props: FormProps) => props.alignItems};
 `;
 
 const Form = ({
