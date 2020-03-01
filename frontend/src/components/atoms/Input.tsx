@@ -18,6 +18,8 @@ const StyledInput = styled.input<InputProps>`
 		min-height: 2.3em;
 		font-size: 1.8rem;
 		padding: 0 1em;
+		border-left: none;
+		border-right: none;
 	}
 `;
 
