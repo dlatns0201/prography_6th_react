@@ -1,10 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledTodoPage = styled.div``;
+import Content from './templates/Content';
 
 const TodoPage = () => {
-	return <StyledTodoPage />;
+	return <Content />;
 };
 
 export default TodoPage;
