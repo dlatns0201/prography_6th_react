@@ -5,10 +5,13 @@ interface ButtonListProps {
 	children: React.ReactChildren;
 }
 
-const StyledButtonList = styled.div``;
+const StyledButtonList = styled.div`
+	display: flex;
+	flex-direction: row;
+`;
 
-const ButtonList = ({ children }: ButtonListProps) => {
-	return <StyledButtonList>{children}</StyledButtonList>;
+const ButtonList = ({ children: buttons }: ButtonListProps) => {
+	return <StyledButtonList>{buttons}</StyledButtonList>;
 };
 
 export default ButtonList;

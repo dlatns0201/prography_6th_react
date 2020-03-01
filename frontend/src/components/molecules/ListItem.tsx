@@ -5,7 +5,9 @@ interface ListItemProps {
 	children: React.ReactChildren;
 }
 
-const StyledListItem = styled.li``;
+const StyledListItem = styled.li`
+	width: 100%;
+`;
 
 const ListItem = ({ children }: ListItemProps) => {
 	return <StyledListItem>{children}</StyledListItem>;

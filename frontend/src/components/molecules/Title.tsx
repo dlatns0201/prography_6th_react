@@ -1,15 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface InputProps {
+import Span from '../atoms/Span';
+
+interface TitleProps {
 	children: React.ReactChildren;
-	placeholder: string;
+	color: string;
 }
 
-const StyledInput = styled.div``;
+const StyledTitle = styled.div`
+	width: 100%;
+`;
 
-const Input = ({ children, placeholder }: InputProps) => {
-	return <StyledInput placeholder={placeholder}>{children}</StyledInput>;
+const Title = ({ children, color = 'inherit' }: TitleProps) => {
+	return (
+		<StyledTitle color={color}>
+			<Span width="100%" textAlign="center">
+				{children}
+			</Span>
+		</StyledTitle>
+	);
 };
 
-export default Input;
+export default Title;

@@ -5,10 +5,14 @@ interface ListProps {
 	children: React.ReactChildren;
 }
 
-const StyledList = styled.ul``;
+const StyledList = styled.ul`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+`;
 
-const List = ({ children }: ListProps) => {
-	return <StyledList>{children}</StyledList>;
+const List = ({ children: items }: ListProps) => {
+	return <StyledList>{items}</StyledList>;
 };
 
 export default List;
