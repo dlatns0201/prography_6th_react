@@ -9,7 +9,7 @@ const fontSizeType = {
 } as const;
 
 interface SpanProps {
-	children?: React.ReactChildren;
+	children?: React.ReactChild;
 	color?: string;
 	fontSize?: 'small' | 'normal' | 'big' | 'title' | number;
 	textAlign?: 'left' | 'right' | 'center';

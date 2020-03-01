@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-	children?: React.ReactChildren;
+	children?: React.ReactChild;
 	flex?: number | 'auto';
 	color?: string;
 	size?: 'small' | 'normal' | 'big';

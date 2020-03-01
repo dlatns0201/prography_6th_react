@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Span from '../atoms/Span';
 
 interface TitleProps {
-	children?: React.ReactChildren;
+	children?: React.ReactChild;
 	color?: string;
 }
 
