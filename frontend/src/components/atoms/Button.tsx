@@ -6,6 +6,7 @@ interface ButtonProps {
 	flex?: number | 'auto';
 	color?: string;
 	size?: 'small' | 'normal' | 'big';
+	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const Size = {
@@ -23,6 +24,7 @@ const StyledButton = styled.button`
 		padding: ${Size[props.size!][0]} ${Size[props.size!][1]};
 		font-size: ${Size[props.size!][2]};
 	`}
+	cursor: pointer;
 `;
 
 const Button = ({ children, flex = 'auto', color = 'black', size = 'normal' }: ButtonProps) => {
