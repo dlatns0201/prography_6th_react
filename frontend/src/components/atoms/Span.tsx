@@ -8,13 +8,14 @@ interface SpanProps {
 	textAlign?: 'left' | 'right' | 'center';
 	width?: string;
 	size?: 'small' | 'normal' | 'big' | 'title';
+	blockWidth?: boolean;
 	className?: string;
 }
 
 const StyledSpan = styled.span<SpanProps>`
 	color: ${(props: SpanProps) => props.color || 'black'};
 	text-align: ${(props: SpanProps) => props.textAlign};
-	width: ${props => props.width};
+	width: ${props => (props.blockWidth ? '100%' : props.width)};
 
 	&.small {
 		padding: 0.5em 0.3em;
@@ -42,12 +43,14 @@ const Span = ({
 	textAlign = 'left',
 	width = 'auto',
 	size = 'normal',
-	className
+	className,
+	blockWidth = false
 }: SpanProps) => {
 	const needProps = {
 		color,
 		textAlign,
-		width
+		width,
+		blockWidth
 	};
 	const classCandiate = [className, size];
 
