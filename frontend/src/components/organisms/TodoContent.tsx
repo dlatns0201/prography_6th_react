@@ -12,7 +12,7 @@ import Button from '../atoms/Button';
 interface TodoContentProps {}
 
 const StyledTodoContent = styled.div`
-	min-width: 40vw;
+	min-width: 730px;
 	display: flex;
 	flex-direction: column;
 
@@ -36,15 +36,23 @@ const TodoContent = () => {
 				<ListItem hr>
 					<Span className="todo-description">Server Side Rendering</Span>
 					<ButtonList className="todo-buttons">
-						<Button style={{ color: 'blue' }}> 수정 </Button>
-						<Button style={{ color: '#FDA7DF' }}> 삭제 </Button>
+						<Button color="blue" outline="none" transparent>
+							수정
+						</Button>
+						<Button color="#FDA7DF" outline="none" transparent>
+							삭제
+						</Button>
 					</ButtonList>
 				</ListItem>
 				<ListItem hr>
 					<Span className="todo-description">Nest js and Next js</Span>
 					<ButtonList className="todo-buttons">
-						<Button style={{ color: 'blue' }}> 수정 </Button>
-						<Button style={{ color: '#FDA7DF' }}> 삭제 </Button>
+						<Button color="blue" outline="none" transparent>
+							수정
+						</Button>
+						<Button color="#FDA7DF" outline="none" transparent>
+							삭제
+						</Button>
 					</ButtonList>
 				</ListItem>
 			</List>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Title from '../molecules/Title';
+import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
 
@@ -18,12 +18,12 @@ const StyledNavigation = styled.div`
 const Navigation = () => {
 	return (
 		<StyledNavigation>
-			<Title>임태현</Title>
+			<Span size="big">임태현</Span>
 			<ButtonList>
-				<Button type="route" url="/">
+				<Button type="route" url="/" outline="none">
 					Todo
 				</Button>
-				<Button type="route" url="/movie">
+				<Button type="route" url="/movie" outline="none">
 					Movie
 				</Button>
 			</ButtonList>
