@@ -33,6 +33,8 @@ module.exports = {
 			{ js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'never' }
 		],
 		'react/jsx-indent': [2, 'tab'],
-		'react/jsx-indent-props': [2, 'tab']
+		'react/jsx-indent-props': [2, 'tab'],
+		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+		'react/jsx-props-no-spreading': 'off'
 	}
 };

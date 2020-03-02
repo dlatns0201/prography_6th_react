@@ -59,23 +59,23 @@ const Button = ({
 	url
 }: ButtonProps) => {
 	const classCandidate = [size];
+	const commonProps = {
+		flex,
+		color,
+		size,
+		outline,
+		bgColor,
+		transparent
+	};
 
 	const RealButton = (
-		<StyledButton flex={flex} color={color} size={size} className={cn(classCandidate)}>
+		<StyledButton {...commonProps} className={cn(classCandidate)}>
 			{children}
 		</StyledButton>
 	);
 	const RealLink = (
 		<StyledLink to={url!}>
-			<StyledButton
-				flex={flex}
-				color={color}
-				size={size}
-				className={cn(classCandidate)}
-				outline={outline}
-				bgColor={bgColor}
-				transparent={transparent}
-			>
+			<StyledButton {...commonProps} className={cn(classCandidate)}>
 				{children}
 			</StyledButton>
 		</StyledLink>
