@@ -20,6 +20,7 @@ interface ButtonProps {
 const StyledButton = styled.button<ButtonProps>`
 	flex: ${(props: ButtonProps) => props.flex};
 	display: flex;
+	justify-content: center;
 	align-items: stretch;
 	border-radius: 3.7px;
 	border: ${(props: ButtonProps) => (props.outline === 'none' ? 'none' : `0.7px solid ${props.outline}`)};

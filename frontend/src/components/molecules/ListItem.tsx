@@ -10,7 +10,6 @@ interface ListItemProps {
 
 const StyledListItem = styled.li<ListItemProps>`
 	width: 100%;
-	padding: 0 1.5em;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;

@@ -21,7 +21,7 @@ const StyledInput = styled.input<InputProps>`
 	&.normal {
 		min-height: 1.8em;
 		font-size: 1.2rem;
-		padding: 0.7em 1.2em;
+		padding: 0.7em 1.5em;
 	}
 	&.big {
 		min-height: 2.1em;

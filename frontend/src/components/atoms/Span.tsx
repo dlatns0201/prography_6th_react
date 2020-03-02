@@ -22,7 +22,8 @@ const StyledSpan = styled.span<SpanProps>`
 		font-size: 1rem;
 	}
 	&.normal {
-		padding: 0.7em 0.5em;
+		padding: 1em 2em;
+		/* padding: 0.7em 0.5em; */
 		font-size: 1.2rem;
 	}
 	&.big {

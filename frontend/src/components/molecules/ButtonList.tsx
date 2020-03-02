@@ -18,10 +18,6 @@ interface ButtonData {
 const StyledButtonList = styled.div`
 	display: flex;
 	flex-direction: row;
-
-	& > * {
-		margin-right: 1em;
-	}
 `;
 
 const ButtonList = ({ children, data = [], className }: ButtonListProps) => {

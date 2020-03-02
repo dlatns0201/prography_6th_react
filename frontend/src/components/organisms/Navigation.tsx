@@ -8,18 +8,34 @@ interface NavigationProps {}
 
 const StyledNavigation = styled.div`
 	width: 100%;
-	height: 4rem;
+	height: auto;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-around;
 	background-color: white;
 	box-shadow: 5px 5px 3px lightgray;
+
+	@media (max-width: 500px) {
+		.nav-title {
+			width: 100%;
+			text-align: center;
+		}
+		.nav-category-list {
+			width: 100%;
+			& > * {
+				flex-grow: 1;
+			}
+		}
+	}
 `;
 
 const Navigation = () => {
 	return (
 		<StyledNavigation>
-			<Span size="big">임태현</Span>
-			<ButtonList>
+			<Span size="big" className="nav-title">
+				임태현
+			</Span>
+			<ButtonList className="nav-category-list">
 				<Button type="route" url="/" outline="none">
 					Todo
 				</Button>
