@@ -26,6 +26,7 @@ const StyledButton = styled.button<ButtonProps>`
 	background: ${(props: ButtonProps) => (props.transparent ? 'transparent' : props.bgColor)};
 	color: ${(props: ButtonProps) => props.color};
 	cursor: pointer;
+	outline: none;
 
 	&.small {
 		padding: 7px 7px;
