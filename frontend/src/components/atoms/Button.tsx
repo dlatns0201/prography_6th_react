@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
 interface ButtonProps {
@@ -9,63 +10,77 @@ interface ButtonProps {
 	size?: 'small' | 'normal' | 'big';
 	type?: 'route' | 'button';
 	url?: string;
-	style?: any;
+	outline?: string;
+	bgColor?: string;
+	transparent?: boolean;
 	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const Size = {
-	small: ['7px', '7px', '1rem'],
-	normal: ['10px', '10px', '1.2rem'],
-	big: ['14px', '14px', '1.4rem']
-} as const;
-
-const StyledButton = (styled.button`
-	border: none;
-	background-color: transparent;
+const StyledButton = styled.button<ButtonProps>`
 	flex: ${(props: ButtonProps) => props.flex};
+	display: flex;
+	align-items: stretch;
+	border-radius: 3.7px;
+	border: ${(props: ButtonProps) => (props.outline === 'none' ? 'none' : `0.7px solid ${props.outline}`)};
+	background: ${(props: ButtonProps) => (props.transparent ? 'transparent' : props.bgColor)};
 	color: ${(props: ButtonProps) => props.color};
-	${(props: ButtonProps) => css`
-		padding: ${Size[props.size!][0]} ${Size[props.size!][1]};
-		font-size: ${Size[props.size!][2]};
-	`}
 	cursor: pointer;
 
-	.route {
-		text-decoration: none;
-		color: black;
+	&.small {
+		padding: 7px 7px;
+		font-size: 1rem;
 	}
-` as unknown) as any;
+	&.normal {
+		padding: 10px 10px;
+		font-size: 1.2rem;
+	}
+	&.big {
+		padding: 14px 14px;
+		font-size: 1.4rem;
+	}
+`;
 
-interface IInnerContent {
-	type: 'route' | 'button';
-	children: React.ReactNode;
-	url?: string;
-}
+const StyledLink = styled(Link)`
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: black;
+`;
 
-const innerContent = ({ type, children, url }: IInnerContent): React.ReactNode => {
-	if (type === 'route' && url)
-		return (
-			<Link to={url} className="route">
-				{children}
-			</Link>
-		);
-	if (type === 'button') return children;
-	return null;
-};
 const Button = ({
 	children,
 	flex = 'auto',
 	color = 'black',
+	outline = 'black',
+	bgColor = 'white',
+	transparent = false,
 	size = 'normal',
 	type = 'button',
-	url,
-	style
+	url
 }: ButtonProps) => {
-	return (
-		<StyledButton flex={flex} color={color} size={size} style={style}>
-			{innerContent({ type, children, url })}
+	const classCandidate = [size];
+
+	const RealButton = (
+		<StyledButton flex={flex} color={color} size={size} className={cn(classCandidate)}>
+			{children}
 		</StyledButton>
 	);
+	const RealLink = (
+		<StyledLink to={url!}>
+			<StyledButton
+				flex={flex}
+				color={color}
+				size={size}
+				className={cn(classCandidate)}
+				outline={outline}
+				bgColor={bgColor}
+				transparent={transparent}
+			>
+				{children}
+			</StyledButton>
+		</StyledLink>
+	);
+	return type === 'route' && url ? RealLink : RealButton;
 };
 
 export default Button;
