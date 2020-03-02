@@ -5,27 +5,41 @@ import cn from 'classnames';
 interface InputProps {
 	children?: React.ReactChildren;
 	placeholder?: string;
-	todo?: boolean;
+	blockWidth?: boolean;
+	size?: 'small' | 'normal' | 'big';
+	monopoly?: boolean;
+	className?: string;
 }
 
 const StyledInput = styled.input<InputProps>`
 	display: inline-block;
-	flex: 1;
 	border: 0.3px solid lightgray;
 
-	&.todo {
-		flex-grow: 1;
-		min-height: 2.3em;
+	&.small {
+		min-height: 1.3em;
+		font-size: 1rem;
+		padding: 0.9em 1.2em;
+	}
+	&.normal {
+		min-height: 1.8em;
+		font-size: 1.2rem;
+		padding: 0.7em 1.2em;
+	}
+	&.big {
+		min-height: 2.1em;
 		font-size: 1.8rem;
-		padding: 0 1em;
-		border-left: none;
-		border-right: none;
+		padding: 0.26em 1.2em;
 	}
 `;
 
-const Input = ({ children, placeholder, todo }: InputProps) => {
+const Input = ({ children, placeholder, size = 'normal', className }: InputProps) => {
+	const classCandiate = [size, className];
+	const needProps = {
+		placeholder
+	};
+
 	return (
-		<StyledInput className={cn({ todo })} placeholder={placeholder}>
+		<StyledInput {...needProps} className={cn(classCandiate)}>
 			{children}
 		</StyledInput>
 	);

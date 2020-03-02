@@ -30,7 +30,7 @@ const TodoContent = () => {
 		<StyledTodoContent>
 			<Title color="#FDA7DF">Todos</Title>
 			<Form flexDirection="column">
-				<Input placeholder="무엇을 해야하나요?" todo />
+				<Input placeholder="무엇을 해야하나요?" />
 			</Form>
 			<List white listHeight="66px">
 				<ListItem hr>
