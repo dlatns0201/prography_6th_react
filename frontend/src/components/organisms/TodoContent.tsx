@@ -35,14 +35,14 @@ const TodoContent = () => {
 				<Input placeholder="무엇을 해야하나요?" todo />
 			</Form>
 			<List white listHeight="66px">
-				<ListItem>
+				<ListItem hr>
 					<Span className="todo-description">Server Side Rendering</Span>
 					<ButtonList className="todo-buttons">
 						<Button style={{ color: 'blue' }}> 수정 </Button>
 						<Button style={{ color: '#FDA7DF' }}> 삭제 </Button>
 					</ButtonList>
 				</ListItem>
-				<ListItem>
+				<ListItem hr>
 					<Span className="todo-description">Nest js and Next js</Span>
 					<ButtonList className="todo-buttons">
 						<Button style={{ color: 'blue' }}> 수정 </Button>
