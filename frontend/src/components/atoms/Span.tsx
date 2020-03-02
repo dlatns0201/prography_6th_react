@@ -1,42 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
+import cn from 'classnames';
 
 interface SpanProps {
 	children?: React.ReactChild;
 	color?: string;
-	fontSize?: string;
 	textAlign?: 'left' | 'right' | 'center';
 	width?: string;
-	height?: string;
-	className?: string;
+	size?: 'small' | 'normal' | 'big' | 'title';
+	className?: string | object;
 }
 
 const StyledSpan = styled.span<SpanProps>`
 	color: ${(props: SpanProps) => props.color || 'black'};
-	font-size: ${(props: SpanProps) => props.fontSize};
 	text-align: ${(props: SpanProps) => props.textAlign};
 	width: ${props => props.width};
-	height: ${props => props.height};
+
+	&.small {
+		padding: 0.5em 0.3em;
+		font-size: 1rem;
+	}
+	&.normal {
+		padding: 0.7em 0.5em;
+		font-size: 1.2rem;
+	}
+	&.big {
+		padding: 1em 0.9em;
+		font-size: 1.2rem;
+	}
+	&.title {
+		padding: 1.3em 1.84em;
+		font-size: 2.5rem;
+	}
 `;
 
 const Span = ({
 	children,
 	color = 'inherit',
-	fontSize = 'inherit',
 	textAlign = 'left',
 	width = 'auto',
-	height = 'auto',
+	size = 'normal',
 	className
 }: SpanProps) => {
+	const classCandiate = [className];
+	classCandiate.push(size);
+
 	return (
-		<StyledSpan
-			color={color}
-			fontSize={fontSize}
-			textAlign={textAlign}
-			width={width}
-			height={height}
-			className={className}
-		>
+		<StyledSpan color={color} textAlign={textAlign} width={width} size={size} className={cn(classCandiate)}>
 			{children}
 		</StyledSpan>
 	);

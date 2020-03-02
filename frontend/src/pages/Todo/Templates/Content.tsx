@@ -6,7 +6,6 @@ import TodoContent from '../../../components/organisms/TodoContent';
 const StyledContent = styled.div`
 	display: flex;
 	justify-content: center;
-	padding-top: 4em;
 `;
 
 const Content = () => {

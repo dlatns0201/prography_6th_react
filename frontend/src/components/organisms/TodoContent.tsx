@@ -28,9 +28,7 @@ const StyledTodoContent = styled.div`
 const TodoContent = () => {
 	return (
 		<StyledTodoContent>
-			<Title color="#FDA7DF" fontSize="3rem">
-				Todos
-			</Title>
+			<Title color="#FDA7DF">Todos</Title>
 			<Form flexDirection="column">
 				<Input placeholder="무엇을 해야하나요?" todo />
 			</Form>

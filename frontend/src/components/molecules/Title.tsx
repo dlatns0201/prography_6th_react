@@ -18,10 +18,10 @@ const StyledTitle = styled.div`
 	color: ${props => props.color};
 `;
 
-const Title = ({ children, color = 'inherit', fontSize = '2rem' }: TitleProps) => {
+const Title = ({ children, color = 'inherit' }: TitleProps) => {
 	return (
 		<StyledTitle color={color}>
-			<Span width="100%" textAlign="center" fontSize={fontSize}>
+			<Span width="100%" textAlign="center" size="title">
 				{children}
 			</Span>
 		</StyledTitle>
