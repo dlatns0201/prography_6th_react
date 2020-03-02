@@ -1,10 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledMoviePage = styled.div``;
+import Content from './templates/Content';
 
 const MoviePage = () => {
-	return <StyledMoviePage />;
+	return <Content />;
 };
 
 export default MoviePage;

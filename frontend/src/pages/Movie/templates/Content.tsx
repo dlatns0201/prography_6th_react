@@ -1,10 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledContent = styled.div``;
+import MovieContent from '../../../components/organisms/MovieContent';
+
+const StyledContent = styled.div`
+	display: flex;
+	justify-content: center;
+	padding-top: 4em;
+`;
 
 const Content = () => {
-	return <StyledContent />;
+	return (
+		<StyledContent>
+			<MovieContent />
+		</StyledContent>
+	);
 };
 
 export default Content;
