@@ -6,7 +6,6 @@ import MovieContent from '../../../components/organisms/MovieContent';
 const StyledContent = styled.div`
 	display: flex;
 	justify-content: center;
-	padding-top: 4em;
 `;
 
 const Content = () => {

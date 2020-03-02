@@ -9,7 +9,7 @@ import Span from '../atoms/Span';
 interface MovieContentProps {}
 
 const StyledMovieContent = styled.div`
-	min-width: 40vw;
+	min-width: 730px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -17,16 +17,22 @@ const StyledMovieContent = styled.div`
 const MovieContent = () => {
 	return (
 		<StyledMovieContent>
-			<Title color="">Movie List</Title>
+			<Title color="#FDA7DF">Movie List</Title>
 			<List>
 				<ListItem>
-					<Span textAlign="center"> movie </Span>
+					<Span textAlign="center" blockWidth>
+						movie
+					</Span>
 				</ListItem>
 				<ListItem>
-					<Span textAlign="center"> joa </Span>
+					<Span textAlign="center" blockWidth>
+						joa
+					</Span>
 				</ListItem>
 				<ListItem>
-					<Span textAlign="center"> nado </Span>
+					<Span textAlign="center" blockWidth>
+						nado
+					</Span>
 				</ListItem>
 			</List>
 		</StyledMovieContent>
