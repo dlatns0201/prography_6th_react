@@ -5,9 +5,7 @@ import cn from 'classnames';
 interface InputProps {
 	children?: React.ReactChildren;
 	placeholder?: string;
-	blockWidth?: boolean;
 	size?: 'small' | 'normal' | 'big';
-	monopoly?: boolean;
 	className?: string;
 }
 
