@@ -13,6 +13,7 @@ interface ButtonProps {
 	outline?: string;
 	bgColor?: string;
 	transparent?: boolean;
+	className?: string;
 	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -56,9 +57,10 @@ const Button = ({
 	transparent = false,
 	size = 'normal',
 	type = 'button',
-	url
+	url,
+	className
 }: ButtonProps) => {
-	const classCandidate = [size];
+	const classCandidate = [size, className];
 	const commonProps = {
 		flex,
 		color,
@@ -80,6 +82,7 @@ const Button = ({
 			</StyledButton>
 		</StyledLink>
 	);
+
 	return type === 'route' && url ? RealLink : RealButton;
 };
 

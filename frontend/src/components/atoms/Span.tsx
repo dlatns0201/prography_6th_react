@@ -8,7 +8,7 @@ interface SpanProps {
 	textAlign?: 'left' | 'right' | 'center';
 	width?: string;
 	size?: 'small' | 'normal' | 'big' | 'title';
-	className?: string | object;
+	className?: string;
 }
 
 const StyledSpan = styled.span<SpanProps>`
@@ -27,10 +27,12 @@ const StyledSpan = styled.span<SpanProps>`
 	&.big {
 		padding: 1em 0.9em;
 		font-size: 1.2rem;
+		font-weight: bold;
 	}
 	&.title {
 		padding: 1.3em 1.84em;
 		font-size: 2.5rem;
+		font-weight: bold;
 	}
 `;
 
@@ -42,11 +44,15 @@ const Span = ({
 	size = 'normal',
 	className
 }: SpanProps) => {
-	const classCandiate = [className];
-	classCandiate.push(size);
+	const needProps = {
+		color,
+		textAlign,
+		width
+	};
+	const classCandiate = [className, size];
 
 	return (
-		<StyledSpan color={color} textAlign={textAlign} width={width} size={size} className={cn(classCandiate)}>
+		<StyledSpan {...needProps} className={cn(classCandiate)}>
 			{children}
 		</StyledSpan>
 	);

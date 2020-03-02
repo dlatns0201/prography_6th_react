@@ -6,6 +6,7 @@ interface ListProps {
 	children?: React.ReactNode;
 	white?: boolean;
 	listHeight?: string;
+	className?: string;
 }
 
 const StyledList = styled.ul<ListProps>`
@@ -22,10 +23,15 @@ const StyledList = styled.ul<ListProps>`
 	}
 `;
 
-const List = ({ children: items, white, listHeight = 'auto' }: ListProps) => {
+const List = ({ children, white, listHeight = 'auto', className }: ListProps) => {
+	const needProps = {
+		listHeight
+	};
+	const classCandidate = [className];
+
 	return (
-		<StyledList className={cn({ white })} listHeight={listHeight}>
-			{items}
+		<StyledList {...needProps} className={cn([classCandidate, { white }])}>
+			{children}
 		</StyledList>
 	);
 };

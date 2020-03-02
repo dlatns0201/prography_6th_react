@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import cn from 'classnames';
 
 interface FormProps {
 	children?: React.ReactNode;
 	flexDirection?: 'column' | 'row';
-	justifyContent?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
-	alignItems?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center';
+	justifyContent?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center' | 'stretch';
+	alignItems?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center' | 'stretch';
+	className?: string;
 	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -17,18 +19,17 @@ const StyledForm = styled.form`
 
 const Form = ({
 	children,
-	flexDirection = 'row',
+	flexDirection = 'column',
 	justifyContent = 'flex-start',
-	alignItems = 'flex-start',
-	onSubmit
+	alignItems = 'stretch',
+	onSubmit,
+	className
 }: FormProps) => {
+	const classCandidate = [className];
+	const needProps = { flexDirection, justifyContent, alignItems };
+
 	return (
-		<StyledForm
-			flexDirection={flexDirection}
-			justifyContent={justifyContent}
-			alignItems={alignItems}
-			onSubmit={onSubmit}
-		>
+		<StyledForm {...needProps} className={cn(classCandidate)} onSubmit={onSubmit}>
 			{children}
 		</StyledForm>
 	);

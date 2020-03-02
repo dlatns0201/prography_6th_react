@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import cn from 'classnames';
 
 import Span from '../atoms/Span';
 
@@ -7,6 +8,7 @@ interface TitleProps {
 	children?: React.ReactChild;
 	color?: string;
 	fontSize?: string;
+	className?: string;
 }
 
 const StyledTitle = styled.div`
@@ -18,9 +20,14 @@ const StyledTitle = styled.div`
 	color: ${props => props.color};
 `;
 
-const Title = ({ children, color = 'inherit' }: TitleProps) => {
+const Title = ({ children, color = 'inherit', className }: TitleProps) => {
+	const needProps = {
+		color
+	};
+	const classCandidate = [className];
+
 	return (
-		<StyledTitle color={color}>
+		<StyledTitle {...needProps} className={cn(classCandidate)}>
 			<Span width="100%" textAlign="center" size="title">
 				{children}
 			</Span>
