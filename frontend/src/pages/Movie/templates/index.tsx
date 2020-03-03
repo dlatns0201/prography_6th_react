@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 import MovieContent from '../../../components/organisms/MovieContent';
 
-const StyledContent = styled.div`
+const StyledTemplate = styled.div`
 	display: flex;
 	justify-content: center;
 `;
 
-const Content = () => {
+const Template = () => {
 	return (
-		<StyledContent>
+		<StyledTemplate>
 			<MovieContent />
-		</StyledContent>
+		</StyledTemplate>
 	);
 };
 
-export default Content;
+export default Template;

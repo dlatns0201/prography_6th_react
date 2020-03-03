@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Content from './templates/Content';
+import Template from './templates';
 
 const TodoPage = () => {
-	return <Content />;
+	return <Template />;
 };
 
 export default TodoPage;
