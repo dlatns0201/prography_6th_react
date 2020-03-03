@@ -14,6 +14,7 @@ interface ButtonProps {
 	bgColor?: string;
 	transparent?: boolean;
 	className?: string;
+	[prop: string]: any;
 	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 

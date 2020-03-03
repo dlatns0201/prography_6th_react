@@ -11,6 +11,7 @@ interface InputProps {
 	className?: string;
 	value?: string;
 	setValue?: React.Dispatch<React.SetStateAction<string>>;
+	[prop: string]: any;
 }
 
 const StyledInput = styled.input<InputProps>`

@@ -8,6 +8,7 @@ interface FormProps {
 	justifyContent?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center' | 'stretch';
 	alignItems?: 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly' | 'center' | 'stretch';
 	className?: string;
+	[prop: string]: any;
 	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 

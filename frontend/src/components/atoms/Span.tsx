@@ -10,6 +10,7 @@ interface SpanProps {
 	size?: 'small' | 'normal' | 'big' | 'title';
 	blockWidth?: boolean;
 	className?: string;
+	[prop: string]: any;
 }
 
 const StyledSpan = styled.span<SpanProps>`
