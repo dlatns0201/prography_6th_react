@@ -111,6 +111,7 @@ function reducer(state: State = initialState, action: Action) {
 		case DELETE_TODO_FAILURE: {
 			return {
 				...state,
+				error: action.error,
 				loading: false
 			};
 		}
