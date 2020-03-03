@@ -19,6 +19,7 @@ const StyledNavigation = styled.div`
 		.nav-title {
 			width: 100%;
 			text-align: center;
+			border-bottom: 0.5px solid lightgray;
 		}
 		.nav-category-list {
 			width: 100%;
@@ -33,7 +34,7 @@ const Navigation = () => {
 	return (
 		<StyledNavigation>
 			<Span size="big" className="nav-title">
-				임태현
+				프로그라피 프론트 임태현
 			</Span>
 			<ButtonList className="nav-category-list">
 				<Button type="link" url="/" outline="none">
