@@ -10,7 +10,9 @@ interface SpanProps {
 	size?: 'small' | 'normal' | 'big' | 'title';
 	blockWidth?: boolean;
 	className?: string;
+	del?: boolean;
 	[prop: string]: any;
+	onClick?: (e: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
 const StyledSpan = styled.span<SpanProps>`
@@ -20,6 +22,9 @@ const StyledSpan = styled.span<SpanProps>`
 	word-wrap: break-word;
 	word-break: break-all;
 
+	&.del {
+		text-decoration: line-through;
+	}
 	&.small {
 		padding: 0.5em 0.3em;
 		font-size: 1rem;
@@ -48,7 +53,9 @@ const Span = ({
 	width = 'auto',
 	size = 'normal',
 	className,
-	blockWidth = false
+	blockWidth = false,
+	del = false,
+	onClick
 }: SpanProps) => {
 	const needProps = {
 		color,
@@ -57,9 +64,10 @@ const Span = ({
 		blockWidth
 	};
 	const classCandiate = [className, size];
+	if (del) classCandiate.push('del');
 
 	return (
-		<StyledSpan {...needProps} className={cn(classCandiate)}>
+		<StyledSpan {...needProps} className={cn(classCandiate)} onClick={onClick}>
 			{children}
 		</StyledSpan>
 	);

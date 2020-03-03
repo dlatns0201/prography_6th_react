@@ -17,7 +17,10 @@ import {
 	insertTodoRequest,
 	deleteTodoRequest,
 	changeToInput,
-	updateTodoRequest
+	updateTodoRequest,
+	// eslint-disable-next-line no-unused-vars
+	Todo,
+	toggleTodoRequest
 } from '../../modules/todo';
 import Modal from './Modal';
 
@@ -112,6 +115,12 @@ const TodoContent = () => {
 		},
 		[]
 	);
+	const onToggleDone = useCallback(
+		(todo: Todo) => () => {
+			dispatch(toggleTodoRequest(todo));
+		},
+		[]
+	);
 
 	const todoItems = useMemo(
 		() =>
@@ -127,7 +136,10 @@ const TodoContent = () => {
 						/>
 					) : (
 						<>
-							<Span className="todo-description">{v.text}</Span>
+							<Span className="todo-description" del={v.done} onClick={onToggleDone(v)}>
+								{v.text}
+							</Span>
+
 							<ButtonList className="todo-buttons">
 								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id, v.text)}>
 									수정

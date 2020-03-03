@@ -1,4 +1,4 @@
-import { takeLatest, all, fork, put } from 'redux-saga/effects';
+import { takeLatest, all, fork, put, takeEvery } from 'redux-saga/effects';
 import { v4 as uuid } from 'uuid';
 import {
 	LOAD_TODOS_REQUEST,
@@ -18,7 +18,11 @@ import {
 	deleteTodoFailure,
 	// eslint-disable-next-line no-unused-vars
 	Todo,
-	deleteTodoRequest
+	deleteTodoRequest,
+	toggleTodoRequest,
+	toggleTodoFAILURE,
+	toggleTodoSuccess,
+	TOGGLE_TODO_REQUEST
 } from '../modules/todo';
 
 const storedData = [
@@ -109,6 +113,23 @@ function* deleteTodo(action: ReturnType<typeof deleteTodoRequest>) {
 	}
 }
 
+const toggleTodoDoneAPI = (todo: Todo) =>
+	new Promise(resolve => {
+		setTimeout(() => {
+			const changedTodo = { ...todo };
+			changedTodo.done = !changedTodo.done;
+			resolve(changedTodo);
+		}, 230);
+	});
+function* toggleTodoDone(action: ReturnType<typeof toggleTodoRequest>) {
+	try {
+		const changedTodo = yield toggleTodoDoneAPI(action.todo);
+		yield put(toggleTodoSuccess(changedTodo));
+	} catch (e) {
+		yield put(toggleTodoFAILURE(e));
+	}
+}
+
 function* watchLoadTodos() {
 	yield takeLatest(LOAD_TODOS_REQUEST, loadTodos);
 }
@@ -121,7 +142,16 @@ function* watchUpdateTodo() {
 function* watchDeleteTodo() {
 	yield takeLatest(DELETE_TODO_REQUEST, deleteTodo);
 }
+function* watchToggleTodoDone() {
+	yield takeEvery(TOGGLE_TODO_REQUEST, toggleTodoDone);
+}
 
 export default function* todoSaga() {
-	yield all([fork(watchLoadTodos), fork(watchInsertTodo), fork(watchUpdateTodo), fork(watchDeleteTodo)]);
+	yield all([
+		fork(watchLoadTodos),
+		fork(watchInsertTodo),
+		fork(watchUpdateTodo),
+		fork(watchDeleteTodo),
+		fork(watchToggleTodoDone)
+	]);
 }

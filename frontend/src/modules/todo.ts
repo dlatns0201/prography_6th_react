@@ -28,6 +28,10 @@ export const DELETE_TODO_REQUEST = 'todo/DELETE_TODO_REQUEST' as const;
 const DELETE_TODO_SUCCESS = 'todo/DELETE_TODO_SUCCESS' as const;
 const DELETE_TODO_FAILURE = 'todo/DELETE_TODO_FAILURE' as const;
 
+export const TOGGLE_TODO_REQUEST = 'todo/TOGGLE_TODO_REQUEST' as const;
+export const TOGGLE_TODO_SUCCESS = 'todo/TOGGLE_TODO_SUCCESS' as const;
+export const TOGGLE_TODO_FAILURE = 'todo/TOGGLE_TODO_FAILURE' as const;
+
 export const loadTodosRequest = (savedTodos: Todo[]) => ({ type: LOAD_TODOS_REQUEST, savedTodos });
 export const loadTodosSuccess = (todos: Todo[]) => ({ type: LOAD_TODOS_SUCCESS, todos });
 export const loadTodosFailure = (error: Error) => ({ type: LOAD_TODOS_FAILURE, error });
@@ -46,6 +50,10 @@ export const deleteTodoRequest = (id: string) => ({ type: DELETE_TODO_REQUEST, i
 export const deleteTodoSuccess = (id: string) => ({ type: DELETE_TODO_SUCCESS, id });
 export const deleteTodoFailure = (error: Error) => ({ type: DELETE_TODO_FAILURE, error });
 
+export const toggleTodoRequest = (todo: Todo) => ({ type: TOGGLE_TODO_REQUEST, todo });
+export const toggleTodoSuccess = (todo: Todo) => ({ type: TOGGLE_TODO_SUCCESS, todo });
+export const toggleTodoFAILURE = (error: Error) => ({ type: TOGGLE_TODO_FAILURE, error });
+
 export type Action =
 	| ReturnType<typeof loadTodosRequest>
 	| ReturnType<typeof loadTodosSuccess>
@@ -59,7 +67,10 @@ export type Action =
 	| ReturnType<typeof deleteTodoRequest>
 	| ReturnType<typeof deleteTodoSuccess>
 	| ReturnType<typeof deleteTodoFailure>
-	| ReturnType<typeof changeToInput>;
+	| ReturnType<typeof changeToInput>
+	| ReturnType<typeof toggleTodoRequest>
+	| ReturnType<typeof toggleTodoSuccess>
+	| ReturnType<typeof toggleTodoFAILURE>;
 
 const initialState: State = {
 	loading: false,
@@ -71,7 +82,8 @@ function reducer(state: State = initialState, action: Action) {
 		case LOAD_TODOS_REQUEST:
 		case INSERT_TODO_REQUEST:
 		case UPDATE_TODO_REQUEST:
-		case DELETE_TODO_REQUEST: {
+		case DELETE_TODO_REQUEST:
+		case TOGGLE_TODO_REQUEST: {
 			return {
 				...state,
 				loading: true
@@ -105,10 +117,18 @@ function reducer(state: State = initialState, action: Action) {
 				loading: false
 			};
 		}
+		case TOGGLE_TODO_SUCCESS: {
+			return {
+				...state,
+				todos: state.todos.map(v => (v.id === action.todo.id ? action.todo : v)),
+				loading: false
+			};
+		}
 		case LOAD_TODOS_FAILURE:
 		case INSERT_TODO_FAILURE:
 		case UPDATE_TODO_FAILURE:
-		case DELETE_TODO_FAILURE: {
+		case DELETE_TODO_FAILURE:
+		case TOGGLE_TODO_FAILURE: {
 			return {
 				...state,
 				error: action.error,
