@@ -23,12 +23,14 @@ const storedData = [
 	{
 		id: 'd251fc48-b2a1-4b52-b0bf-147896235917',
 		text: 'Server Side Rendering',
-		done: false
+		done: false,
+		writeMode: false
 	},
 	{
 		id: '241d6376-f2cc-4f98-99a9-ea54232b89db',
 		text: 'Atomic Design',
-		done: true
+		done: true,
+		writeMode: false
 	}
 ];
 
@@ -63,6 +65,9 @@ const insertTodoAPI = (text: string) =>
 function* insertTodo(action: ReturnType<typeof insertTodoRequest>) {
 	try {
 		const todo = yield insertTodoAPI(action.text);
+		todo.done = false;
+		todo.writeMode = false;
+
 		yield put(insertTodoSuccess(todo));
 	} catch (e) {
 		yield put(insertTodoFailure(e));

@@ -10,8 +10,9 @@ import ListItem from '../molecules/ListItem';
 import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
+// eslint-disable-next-line no-unused-vars
 import { RootState } from '../../modules';
-import { loadTodosRequest, insertTodoRequest } from '../../modules/todo';
+import { loadTodosRequest, insertTodoRequest, deleteTodoRequest, changeToInput } from '../../modules/todo';
 
 interface TodoContentProps {}
 
@@ -21,21 +22,26 @@ const StyledTodoContent = styled.div`
 	flex-direction: column;
 	align-items: center;
 
+	input {
+		border: none;
+	}
+	input[name='todo-create-input'] {
+		border-bottom: 0.3px solid lightgray;
+	}
 	.todo-list-item {
 		flex-wrap: wrap;
 		max-width: 730px;
 	}
 	.todo-form {
 		width: 100%;
-		input {
-			border-left: none;
-			border-right: none;
-		}
 	}
 	.todo-description {
-		padding: 1em 1.57em;
+		padding: 0.9em 1.57em;
 		width: 76%;
 		box-sizing: border-box;
+	}
+	.todo-description.todo-update-input {
+		width: 100%;
 	}
 	.todo-buttons {
 		width: 24%;
@@ -75,6 +81,8 @@ const TodoContent = () => {
 		},
 		[value]
 	);
+	const onDeleteItem = useCallback((id: string) => () => dispatch(deleteTodoRequest(id)), []);
+	const onChangeToInput = useCallback((id: string) => () => dispatch(changeToInput(id)), []);
 
 	useEffect(() => {
 		dispatch(loadTodosRequest());
@@ -84,15 +92,21 @@ const TodoContent = () => {
 		() =>
 			todos.map(v => (
 				<ListItem key={v.id} hr className="todo-list-item">
-					<Span className="todo-description">{v.text}</Span>
-					<ButtonList className="todo-buttons">
-						<Button color="blue" outline="none" transparent>
-							수정
-						</Button>
-						<Button color="#FDA7DF" outline="none" transparent>
-							삭제
-						</Button>
-					</ButtonList>
+					{v.writeMode ? (
+						<Input className="todo-description todo-update-input" value={v.text} size="big" />
+					) : (
+						<>
+							<Span className="todo-description">{v.text}</Span>
+							<ButtonList className="todo-buttons">
+								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id)}>
+									수정
+								</Button>
+								<Button color="#FDA7DF" outline="none" transparent onClick={onDeleteItem(v.id)}>
+									삭제
+								</Button>
+							</ButtonList>
+						</>
+					)}
 				</ListItem>
 			)),
 		[todos]

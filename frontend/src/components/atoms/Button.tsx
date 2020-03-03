@@ -61,7 +61,8 @@ const Button = ({
 	size = 'normal',
 	type = 'button',
 	url,
-	className
+	className,
+	onClick
 }: ButtonProps) => {
 	const classCandidate = [size, className];
 	const commonProps = {
@@ -74,7 +75,7 @@ const Button = ({
 	};
 
 	const RealButton = (
-		<StyledButton {...commonProps} className={cn(classCandidate)}>
+		<StyledButton {...commonProps} className={cn(classCandidate)} onClick={onClick}>
 			{children}
 		</StyledButton>
 	);
