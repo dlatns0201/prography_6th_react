@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
@@ -35,4 +35,4 @@ const Title = ({ children, color = 'inherit', className }: TitleProps) => {
 	);
 };
 
-export default Title;
+export default memo(Title);

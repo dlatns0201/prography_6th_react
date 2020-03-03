@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
@@ -25,4 +25,4 @@ const ListItem = ({ children, hr = false, className }: ListItemProps) => {
 	return <StyledListItem className={cn([classCandidate, { hr }])}>{children}</StyledListItem>;
 };
 
-export default ListItem;
+export default memo(ListItem);

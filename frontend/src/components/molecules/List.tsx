@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
@@ -36,4 +36,4 @@ const List = ({ children, white, listHeight = 'auto', className }: ListProps) =>
 	);
 };
 
-export default List;
+export default memo(List);

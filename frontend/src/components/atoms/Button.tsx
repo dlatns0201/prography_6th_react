@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
@@ -88,4 +88,4 @@ const Button = ({
 	return type === 'route' && url ? RealLink : RealButton;
 };
 
-export default Button;
+export default memo(Button);

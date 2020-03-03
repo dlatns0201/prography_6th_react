@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import styled from 'styled-components';
 import Title from '../molecules/Title';
 import Form from '../atoms/Form';
@@ -100,4 +100,4 @@ const TodoContent = () => {
 	);
 };
 
-export default TodoContent;
+export default memo(TodoContent);

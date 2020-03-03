@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
@@ -32,4 +32,4 @@ const ButtonList = ({ children, data = [], className }: ButtonListProps) => {
 	);
 };
 
-export default ButtonList;
+export default memo(ButtonList);

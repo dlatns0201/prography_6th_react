@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
@@ -63,4 +63,4 @@ const Input = ({
 	);
 };
 
-export default Input;
+export default memo(Input);
