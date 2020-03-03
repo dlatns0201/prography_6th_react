@@ -63,7 +63,7 @@ const insertTodoAPI = (text: string) =>
 				text
 			};
 			resolve(todo);
-		}, 500);
+		}, 230);
 	});
 function* insertTodo(action: ReturnType<typeof insertTodoRequest>) {
 	try {
@@ -82,7 +82,7 @@ const updateTodoAPI = (todo: Todo) =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(todo);
-		}, 500);
+		}, 230);
 	});
 function* updateTodo(action: ReturnType<typeof updateTodoRequest>) {
 	try {
@@ -98,7 +98,7 @@ const deleteTodoAPI = (id: string) =>
 	new Promise(resolve => {
 		setTimeout(() => {
 			resolve(id);
-		}, 500);
+		}, 230);
 	});
 function* deleteTodo(action: ReturnType<typeof deleteTodoRequest>) {
 	try {
