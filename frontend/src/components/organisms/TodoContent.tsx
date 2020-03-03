@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, useCallback, memo, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,6 +11,7 @@ import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
 import { RootState } from '../../modules';
+import { loadTodosRequest } from '../../modules/todo';
 
 interface TodoContentProps {}
 
@@ -60,7 +61,7 @@ const StyledTodoContent = styled.div`
 
 const TodoContent = () => {
 	const [value, setValue] = useState('');
-	const { todos } = useSelector((state: RootState) => state.todo);
+	const { todos, loading } = useSelector((state: RootState) => state.todo);
 	const dispatch = useDispatch();
 
 	const onSubmitForm = useCallback(
@@ -72,19 +73,27 @@ const TodoContent = () => {
 		[value]
 	);
 
-	const todoItems = todos.map(v => (
-		<ListItem key={v.id} hr className="todo-list-item">
-			<Span className="todo-description">{v.text}</Span>
-			<ButtonList className="todo-buttons">
-				<Button color="blue" outline="none" transparent>
-					수정
-				</Button>
-				<Button color="#FDA7DF" outline="none" transparent>
-					삭제
-				</Button>
-			</ButtonList>
-		</ListItem>
-	));
+	useEffect(() => {
+		dispatch(loadTodosRequest());
+	}, []);
+
+	const todoItems = useMemo(
+		() =>
+			todos.map(v => (
+				<ListItem key={v.id} hr className="todo-list-item">
+					<Span className="todo-description">{v.text}</Span>
+					<ButtonList className="todo-buttons">
+						<Button color="blue" outline="none" transparent>
+							수정
+						</Button>
+						<Button color="#FDA7DF" outline="none" transparent>
+							삭제
+						</Button>
+					</ButtonList>
+				</ListItem>
+			)),
+		[todos]
+	);
 
 	return (
 		<StyledTodoContent>
@@ -92,9 +101,13 @@ const TodoContent = () => {
 			<Form flexDirection="column" className="todo-form" onSubmit={onSubmitForm}>
 				<Input placeholder="무엇을 해야하나요?" name="todo-create-input" value={value} setValue={setValue} />
 			</Form>
-			<List white listHeight="66px">
-				{todoItems}
-			</List>
+			{loading ? (
+				<div>로딩 중</div>
+			) : (
+				<List white listHeight="66px">
+					{todoItems}
+				</List>
+			)}
 		</StyledTodoContent>
 	);
 };
