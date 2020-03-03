@@ -15,6 +15,10 @@ const StyledMovieContent = styled.div`
 	min-width: 730px;
 	display: flex;
 	flex-direction: column;
+
+	.movie-item {
+		padding: 0;
+	}
 `;
 
 const MovieContent = () => {
@@ -23,14 +27,14 @@ const MovieContent = () => {
 
 	const movieItems = movies.map(title => (
 		<ListItem key={title}>
-			<Span textAlign="center" size="small" blockWidth>
+			<Span className="movie-item" textAlign="center" size="small" blockWidth>
 				{title}
 			</Span>
 		</ListItem>
 	));
 
 	useEffect(() => {
-		dispatch(loadMovieListRequest());
+		if (!movies.length) dispatch(loadMovieListRequest());
 	}, []);
 
 	return (
