@@ -11,7 +11,7 @@ import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
 import { RootState } from '../../modules';
-import { loadTodosRequest } from '../../modules/todo';
+import { loadTodosRequest, insertTodoRequest } from '../../modules/todo';
 
 interface TodoContentProps {}
 
@@ -67,7 +67,7 @@ const TodoContent = () => {
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
-			console.log(value);
+			dispatch(insertTodoRequest(value));
 			setValue('');
 		},
 		[value]
@@ -101,13 +101,10 @@ const TodoContent = () => {
 			<Form flexDirection="column" className="todo-form" onSubmit={onSubmitForm}>
 				<Input placeholder="무엇을 해야하나요?" name="todo-create-input" value={value} setValue={setValue} />
 			</Form>
-			{loading ? (
-				<div>로딩 중</div>
-			) : (
-				<List white listHeight="66px">
-					{todoItems}
-				</List>
-			)}
+			{loading ? <div> 변경사항 적용 중...</div> : null}
+			<List white listHeight="66px">
+				{todoItems}
+			</List>
 		</StyledTodoContent>
 	);
 };
