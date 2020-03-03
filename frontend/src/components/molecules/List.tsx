@@ -19,7 +19,7 @@ const StyledList = styled.ul<ListProps>`
 	}
 
 	& > * {
-		height: ${props => props.listHeight};
+		min-height: ${props => props.listHeight};
 	}
 `;
 

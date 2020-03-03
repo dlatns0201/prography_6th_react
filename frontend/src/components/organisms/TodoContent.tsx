@@ -23,6 +23,7 @@ const StyledTodoContent = styled.div`
 
 	.todo-list-item {
 		flex-wrap: wrap;
+		max-width: 730px;
 	}
 	.todo-form {
 		width: 100%;
@@ -33,10 +34,12 @@ const StyledTodoContent = styled.div`
 	}
 	.todo-description {
 		padding: 1em 1.57em;
+		width: 76%;
+		box-sizing: border-box;
 	}
 	.todo-buttons {
-		margin-left: auto;
-		margin-right: 1em;
+		width: 24%;
+		box-sizing: border-box;
 	}
 
 	@media (max-width: 750px) {

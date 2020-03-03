@@ -17,6 +17,8 @@ const StyledSpan = styled.span<SpanProps>`
 	color: ${(props: SpanProps) => props.color || 'black'};
 	text-align: ${(props: SpanProps) => props.textAlign};
 	width: ${props => (props.blockWidth ? '100%' : props.width)};
+	word-wrap: break-word;
+	word-break: break-all;
 
 	&.small {
 		padding: 0.5em 0.3em;
