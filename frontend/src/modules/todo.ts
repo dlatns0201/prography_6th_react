@@ -28,7 +28,7 @@ export const DELETE_TODO_REQUEST = 'todo/DELETE_TODO_REQUEST' as const;
 const DELETE_TODO_SUCCESS = 'todo/DELETE_TODO_SUCCESS' as const;
 const DELETE_TODO_FAILURE = 'todo/DELETE_TODO_FAILURE' as const;
 
-export const loadTodosRequest = () => ({ type: LOAD_TODOS_REQUEST });
+export const loadTodosRequest = (savedTodos: Todo[]) => ({ type: LOAD_TODOS_REQUEST, savedTodos });
 export const loadTodosSuccess = (todos: Todo[]) => ({ type: LOAD_TODOS_SUCCESS, todos });
 export const loadTodosFailure = (error: Error) => ({ type: LOAD_TODOS_FAILURE, error });
 

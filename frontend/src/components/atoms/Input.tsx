@@ -11,6 +11,8 @@ interface InputProps {
 	className?: string;
 	value?: string;
 	setValue?: React.Dispatch<React.SetStateAction<string>>;
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 	[prop: string]: any;
 }
 
@@ -43,22 +45,28 @@ const Input = ({
 	type = 'text',
 	name,
 	value = '',
-	setValue
+	setValue,
+	onChange,
+	onKeyDown
 }: InputProps) => {
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-		setValue!(e.target.value);
-	}, []);
+	const onChangeInput =
+		onChange ||
+		useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+			setValue!(e.target.value);
+		}, []);
 
 	const classCandiate = [size, className];
 	const needProps = {
 		placeholder,
 		type,
 		name,
-		value
+		value,
+		onKeyDown,
+		onChange: onChangeInput
 	};
 
 	return (
-		<StyledInput {...needProps} className={cn(classCandiate)} onChange={onChangeInput}>
+		<StyledInput {...needProps} className={cn(classCandiate)}>
 			{children}
 		</StyledInput>
 	);

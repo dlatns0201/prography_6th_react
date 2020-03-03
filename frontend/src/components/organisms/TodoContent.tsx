@@ -12,9 +12,18 @@ import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
 // eslint-disable-next-line no-unused-vars
 import { RootState } from '../../modules';
-import { loadTodosRequest, insertTodoRequest, deleteTodoRequest, changeToInput } from '../../modules/todo';
+import {
+	loadTodosRequest,
+	insertTodoRequest,
+	deleteTodoRequest,
+	changeToInput,
+	updateTodoRequest
+} from '../../modules/todo';
 
 interface TodoContentProps {}
+interface UpdateInputValue {
+	[id: string]: string;
+}
 
 const StyledTodoContent = styled.div`
 	min-width: 730px;
@@ -69,36 +78,57 @@ const StyledTodoContent = styled.div`
 `;
 
 const TodoContent = () => {
-	const [value, setValue] = useState('');
+	const [insertInputValue, setInsertInputValue] = useState('');
+	const [updateInputValues, setUpdateInputValues] = useState<UpdateInputValue>({});
 	const { todos, loading } = useSelector((state: RootState) => state.todo);
 	const dispatch = useDispatch();
 
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
-			dispatch(insertTodoRequest(value));
-			setValue('');
+			dispatch(insertTodoRequest(insertInputValue));
+			setInsertInputValue('');
 		},
-		[value]
+		[insertInputValue]
 	);
 	const onDeleteItem = useCallback((id: string) => () => dispatch(deleteTodoRequest(id)), []);
-	const onChangeToInput = useCallback((id: string) => () => dispatch(changeToInput(id)), []);
-
-	useEffect(() => {
-		dispatch(loadTodosRequest());
-	}, []);
+	const onChangeToInput = useCallback(
+		(id: string, text: string) => () => {
+			dispatch(changeToInput(id));
+			setUpdateInputValues({ ...updateInputValues, [id]: text });
+		},
+		[updateInputValues]
+	);
+	const onChangeInput = useCallback(
+		(id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+			setUpdateInputValues({ ...updateInputValues, [id]: e.target.value });
+		},
+		[updateInputValues]
+	);
+	const onEnter = useCallback(
+		(id: string, text: string, done: boolean) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (e.key === 'Enter') dispatch(updateTodoRequest({ id, text, writeMode: false, done }));
+		},
+		[]
+	);
 
 	const todoItems = useMemo(
 		() =>
 			todos.map(v => (
 				<ListItem key={v.id} hr className="todo-list-item">
 					{v.writeMode ? (
-						<Input className="todo-description todo-update-input" value={v.text} size="big" />
+						<Input
+							className="todo-description todo-update-input"
+							onChange={onChangeInput(v.id)}
+							onKeyDown={onEnter(v.id, updateInputValues[v.id], v.done)}
+							value={updateInputValues[v.id]}
+							size="big"
+						/>
 					) : (
 						<>
 							<Span className="todo-description">{v.text}</Span>
 							<ButtonList className="todo-buttons">
-								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id)}>
+								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id, v.text)}>
 									수정
 								</Button>
 								<Button color="#FDA7DF" outline="none" transparent onClick={onDeleteItem(v.id)}>
@@ -109,14 +139,23 @@ const TodoContent = () => {
 					)}
 				</ListItem>
 			)),
-		[todos]
+		[todos, updateInputValues]
 	);
+
+	useEffect(() => {
+		if (!todos.length) dispatch(loadTodosRequest(todos));
+	}, []);
 
 	return (
 		<StyledTodoContent>
 			<Title color="#FDA7DF">Todos</Title>
 			<Form flexDirection="column" className="todo-form" onSubmit={onSubmitForm}>
-				<Input placeholder="무엇을 해야하나요?" name="todo-create-input" value={value} setValue={setValue} />
+				<Input
+					placeholder="무엇을 해야하나요?"
+					name="todo-create-input"
+					value={insertInputValue}
+					setValue={setInsertInputValue}
+				/>
 			</Form>
 			{loading ? <div> 변경사항 적용 중...</div> : null}
 			<List white listHeight="66px">

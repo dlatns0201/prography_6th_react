@@ -5,6 +5,7 @@ import {
 	INSERT_TODO_REQUEST,
 	UPDATE_TODO_REQUEST,
 	DELETE_TODO_REQUEST,
+	loadTodosRequest,
 	loadTodosSuccess,
 	loadTodosFailure,
 	insertTodoRequest,
@@ -19,6 +20,7 @@ import {
 	Todo,
 	deleteTodoRequest
 } from '../modules/todo';
+
 const storedData = [
 	{
 		id: 'd251fc48-b2a1-4b52-b0bf-147896235917',
@@ -34,16 +36,17 @@ const storedData = [
 	}
 ];
 
-const loadTodosAPI = () =>
+const loadTodosAPI = (savedTodos: Todo[]) =>
 	// axios
 	new Promise(resolve => {
 		setTimeout(() => {
-			resolve(storedData);
+			const loadedData = savedTodos.length ? savedTodos : storedData;
+			resolve(loadedData);
 		}, 1000);
 	});
-function* loadTodos() {
+function* loadTodos(action: ReturnType<typeof loadTodosRequest>) {
 	try {
-		const todos = yield loadTodosAPI();
+		const todos = yield loadTodosAPI(action.savedTodos);
 		yield put(loadTodosSuccess(todos));
 	} catch (e) {
 		yield put(loadTodosFailure(e));
