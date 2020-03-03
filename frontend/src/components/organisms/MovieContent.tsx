@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,6 +7,7 @@ import List from '../molecules/List';
 import ListItem from '../molecules/ListItem';
 import Span from '../atoms/Span';
 import { RootState } from '../../modules';
+import { loadMovieListRequest } from '../../modules/movie';
 
 interface MovieContentProps {}
 
@@ -17,19 +18,25 @@ const StyledMovieContent = styled.div`
 `;
 
 const MovieContent = () => {
-	const { movies } = useSelector((state: RootState) => state.movie);
-	const movieItems = movies.map(v => (
-		<ListItem key={v.title}>
-			<Span textAlign="center" blockWidth>
-				{v.title}
+	const { movies, loading } = useSelector((state: RootState) => state.movie);
+	const dispatch = useDispatch();
+
+	const movieItems = movies.map(title => (
+		<ListItem key={title}>
+			<Span textAlign="center" size="small" blockWidth>
+				{title}
 			</Span>
 		</ListItem>
 	));
 
+	useEffect(() => {
+		dispatch(loadMovieListRequest());
+	}, []);
+
 	return (
 		<StyledMovieContent>
 			<Title color="#FDA7DF">Movie List</Title>
-			<List>{movieItems}</List>
+			{loading ? <div> 로딩 중...</div> : <List listHeight="20px">{movieItems}</List>}
 		</StyledMovieContent>
 	);
 };
