@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
 interface InputProps {
 	children?: React.ReactChildren;
+	type?: 'text' | 'password' | 'email';
 	placeholder?: string;
 	size?: 'small' | 'normal' | 'big';
+	name?: string;
 	className?: string;
+	value?: string;
+	setValue?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -30,14 +34,30 @@ const StyledInput = styled.input<InputProps>`
 	}
 `;
 
-const Input = ({ children, placeholder, size = 'normal', className }: InputProps) => {
+const Input = ({
+	children,
+	placeholder,
+	size = 'normal',
+	className,
+	type = 'text',
+	name,
+	value = '',
+	setValue
+}: InputProps) => {
+	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		setValue!(e.target.value);
+	}, []);
+
 	const classCandiate = [size, className];
 	const needProps = {
-		placeholder
+		placeholder,
+		type,
+		name,
+		value
 	};
 
 	return (
-		<StyledInput {...needProps} className={cn(classCandiate)}>
+		<StyledInput {...needProps} className={cn(classCandiate)} onChange={onChangeInput}>
 			{children}
 		</StyledInput>
 	);

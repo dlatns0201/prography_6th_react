@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import Title from '../molecules/Title';
 import Form from '../atoms/Form';
@@ -56,11 +56,21 @@ const StyledTodoContent = styled.div`
 `;
 
 const TodoContent = () => {
+	const [value, setValue] = useState('');
+	const onSubmitForm = useCallback(
+		(e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
+			console.log(value);
+			setValue('');
+		},
+		[value]
+	);
+
 	return (
 		<StyledTodoContent>
 			<Title color="#FDA7DF">Todos</Title>
-			<Form flexDirection="column" className="todo-form">
-				<Input placeholder="무엇을 해야하나요?" />
+			<Form flexDirection="column" className="todo-form" onSubmit={onSubmitForm}>
+				<Input placeholder="무엇을 해야하나요?" name="todo-create-input" value={value} setValue={setValue} />
 			</Form>
 			<List white listHeight="66px">
 				<ListItem hr className="todo-list-item">
