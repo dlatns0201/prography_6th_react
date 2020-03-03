@@ -8,7 +8,7 @@ interface ButtonProps {
 	flex?: number | 'auto';
 	color?: string;
 	size?: 'small' | 'normal' | 'big';
-	type?: 'route' | 'button';
+	type?: 'link' | 'button';
 	url?: string;
 	outline?: string;
 	bgColor?: string;
@@ -85,7 +85,7 @@ const Button = ({
 		</StyledLink>
 	);
 
-	return type === 'route' && url ? RealLink : RealButton;
+	return type === 'link' && url ? RealLink : RealButton;
 };
 
 export default memo(Button);

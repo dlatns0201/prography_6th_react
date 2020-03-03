@@ -36,10 +36,10 @@ const Navigation = () => {
 				임태현
 			</Span>
 			<ButtonList className="nav-category-list">
-				<Button type="route" url="/" outline="none">
+				<Button type="link" url="/" outline="none">
 					Todo
 				</Button>
-				<Button type="route" url="/movie" outline="none">
+				<Button type="link" url="/movie" outline="none">
 					Movie
 				</Button>
 			</ButtonList>
