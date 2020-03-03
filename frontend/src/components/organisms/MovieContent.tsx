@@ -6,8 +6,10 @@ import Title from '../molecules/Title';
 import List from '../molecules/List';
 import ListItem from '../molecules/ListItem';
 import Span from '../atoms/Span';
+// eslint-disable-next-line no-unused-vars
 import { RootState } from '../../modules';
 import { loadMovieListRequest } from '../../modules/movie';
+import Modal from './Modal';
 
 interface MovieContentProps {}
 
@@ -40,7 +42,7 @@ const MovieContent = () => {
 	return (
 		<StyledMovieContent>
 			<Title color="#FDA7DF">Movie List</Title>
-			{loading ? <div> 로딩 중...</div> : <List listHeight="20px">{movieItems}</List>}
+			{loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : <List listHeight="20px">{movieItems}</List>}
 		</StyledMovieContent>
 	);
 };

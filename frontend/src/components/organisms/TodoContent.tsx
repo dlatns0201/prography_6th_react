@@ -19,6 +19,7 @@ import {
 	changeToInput,
 	updateTodoRequest
 } from '../../modules/todo';
+import Modal from './Modal';
 
 interface TodoContentProps {}
 interface UpdateInputValue {
@@ -157,7 +158,7 @@ const TodoContent = () => {
 					setValue={setInsertInputValue}
 				/>
 			</Form>
-			{loading ? <div> 변경사항 적용 중...</div> : null}
+			{loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : null}
 			<List white listHeight="66px">
 				{todoItems}
 			</List>
