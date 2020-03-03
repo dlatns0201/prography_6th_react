@@ -1,5 +1,7 @@
 import React, { useState, useCallback, memo } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+
 import Title from '../molecules/Title';
 import Form from '../atoms/Form';
 import List from '../molecules/List';
@@ -8,6 +10,7 @@ import ListItem from '../molecules/ListItem';
 import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
+import { RootState } from '../../modules';
 
 interface TodoContentProps {}
 
@@ -57,6 +60,9 @@ const StyledTodoContent = styled.div`
 
 const TodoContent = () => {
 	const [value, setValue] = useState('');
+	const { todos } = useSelector((state: RootState) => state.todo);
+	const dispatch = useDispatch();
+
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
@@ -66,6 +72,20 @@ const TodoContent = () => {
 		[value]
 	);
 
+	const todoItems = todos.map(v => (
+		<ListItem key={v.id} hr className="todo-list-item">
+			<Span className="todo-description">{v.text}</Span>
+			<ButtonList className="todo-buttons">
+				<Button color="blue" outline="none" transparent>
+					수정
+				</Button>
+				<Button color="#FDA7DF" outline="none" transparent>
+					삭제
+				</Button>
+			</ButtonList>
+		</ListItem>
+	));
+
 	return (
 		<StyledTodoContent>
 			<Title color="#FDA7DF">Todos</Title>
@@ -73,28 +93,7 @@ const TodoContent = () => {
 				<Input placeholder="무엇을 해야하나요?" name="todo-create-input" value={value} setValue={setValue} />
 			</Form>
 			<List white listHeight="66px">
-				<ListItem hr className="todo-list-item">
-					<Span className="todo-description">Server Side Rendering</Span>
-					<ButtonList className="todo-buttons">
-						<Button color="blue" outline="none" transparent>
-							수정
-						</Button>
-						<Button color="#FDA7DF" outline="none" transparent>
-							삭제
-						</Button>
-					</ButtonList>
-				</ListItem>
-				<ListItem hr className="todo-list-item">
-					<Span className="todo-description">Nest js and Next js</Span>
-					<ButtonList className="todo-buttons">
-						<Button color="blue" outline="none" transparent>
-							수정
-						</Button>
-						<Button color="#FDA7DF" outline="none" transparent>
-							삭제
-						</Button>
-					</ButtonList>
-				</ListItem>
+				{todoItems}
 			</List>
 		</StyledTodoContent>
 	);
