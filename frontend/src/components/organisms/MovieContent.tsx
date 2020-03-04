@@ -40,7 +40,17 @@ const MovieContent = () => {
 		if (!movies.length) dispatch(loadMovieListRequest());
 	}, []);
 
-	if (!movies.length) return <Preloader resolve={() => dispatch(loadMovieListRequest())} />;
+	if (!movies.length)
+		return (
+			<>
+				{loading ? (
+					<Modal dialog={<Span size="title">Loading...</Span>} />
+				) : (
+					<List listHeight="20px">{movieItems}</List>
+				)}
+				<Preloader resolve={() => dispatch(loadMovieListRequest())} />
+			</>
+		);
 
 	return (
 		<StyledMovieContent>

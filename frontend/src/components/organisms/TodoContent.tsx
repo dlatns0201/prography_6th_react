@@ -156,7 +156,13 @@ const TodoContent = () => {
 		if (!todos.length) dispatch(loadTodosRequest(todos));
 	}, []);
 
-	if (!todos.length) return <Preloader resolve={() => dispatch(loadTodosRequest([]))} />;
+	if (!todos.length)
+		return (
+			<>
+				{loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : null}
+				<Preloader resolve={() => dispatch(loadTodosRequest([]))} />
+			</>
+		);
 
 	return (
 		<StyledTodoContent>
