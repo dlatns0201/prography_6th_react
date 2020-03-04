@@ -19,7 +19,10 @@
   "author": "TaeHyun Lim",
   "license": "MIT",
   "dependencies": {
+    "@loadable/babel-plugin": "^5.12.0",
     "@loadable/component": "^5.12.0",
+    "@loadable/server": "^5.12.0",
+    "@loadable/webpack-plugin": "^5.12.0",
     "@types/classnames": "^2.2.9",
     "@types/loadable__component": "^5.10.0",
     "@types/react": "^16.9.23",

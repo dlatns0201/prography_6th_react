@@ -5,12 +5,16 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSaga from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
+// import loadable from '@loadable/component';
 
+import rootReducer from './modules';
+import rootSaga from './sagas';
 import Navigation from './components/organisms/Navigation';
 import MoviePage from './pages/Movie';
 import TodoPage from './pages/Todo';
-import rootReducer from './modules';
-import rootSaga from './sagas';
+// const Navigation = loadable(() => import('./components/organisms/Navigation'));
+// const MoviePage = loadable(() => import('./pages/Movie'));
+// const TodoPage = loadable(() => import('./pages/Todo'));
 
 const AppContainer = styled.div`
 	background-color: #ecf0f1;
