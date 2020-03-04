@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -23,6 +23,7 @@ import {
 	toggleTodoRequest
 } from '../../modules/todo';
 import Modal from './Modal';
+import { Preloader } from '../../PreloadContext';
 
 interface TodoContentProps {}
 interface UpdateInputValue {
@@ -122,42 +123,40 @@ const TodoContent = () => {
 		[]
 	);
 
-	const todoItems = useMemo(
-		() =>
-			todos.map(v => (
-				<ListItem key={v.id} hr className="todo-list-item">
-					{v.writeMode ? (
-						<Input
-							className="todo-description todo-update-input"
-							onChange={onChangeInput(v.id)}
-							onKeyDown={onEnter(v.id, updateInputValues[v.id], v.done)}
-							value={updateInputValues[v.id]}
-							size="big"
-						/>
-					) : (
-						<>
-							<Span className="todo-description" del={v.done} onClick={onToggleDone(v)}>
-								{v.text}
-							</Span>
+	const todoItems = todos.map(v => (
+		<ListItem key={v.id} hr className="todo-list-item">
+			{v.writeMode ? (
+				<Input
+					className="todo-description todo-update-input"
+					onChange={onChangeInput(v.id)}
+					onKeyDown={onEnter(v.id, updateInputValues[v.id], v.done)}
+					value={updateInputValues[v.id]}
+					size="big"
+				/>
+			) : (
+				<>
+					<Span className="todo-description" del={v.done} onClick={onToggleDone(v)}>
+						{v.text}
+					</Span>
 
-							<ButtonList className="todo-buttons">
-								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id, v.text)}>
-									수정
-								</Button>
-								<Button color="#FDA7DF" outline="none" transparent onClick={onDeleteItem(v.id)}>
-									삭제
-								</Button>
-							</ButtonList>
-						</>
-					)}
-				</ListItem>
-			)),
-		[todos, updateInputValues]
-	);
+					<ButtonList className="todo-buttons">
+						<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id, v.text)}>
+							수정
+						</Button>
+						<Button color="#FDA7DF" outline="none" transparent onClick={onDeleteItem(v.id)}>
+							삭제
+						</Button>
+					</ButtonList>
+				</>
+			)}
+		</ListItem>
+	));
 
 	useEffect(() => {
 		if (!todos.length) dispatch(loadTodosRequest(todos));
 	}, []);
+
+	if (!todos.length) return <Preloader resolve={() => dispatch(loadTodosRequest([]))} />;
 
 	return (
 		<StyledTodoContent>

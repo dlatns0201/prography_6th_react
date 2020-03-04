@@ -10,6 +10,7 @@ import Span from '../atoms/Span';
 import { RootState } from '../../modules';
 import { loadMovieListRequest } from '../../modules/movie';
 import Modal from './Modal';
+import { Preloader } from '../../PreloadContext';
 
 interface MovieContentProps {}
 
@@ -38,6 +39,8 @@ const MovieContent = () => {
 	useEffect(() => {
 		if (!movies.length) dispatch(loadMovieListRequest());
 	}, []);
+
+	if (!movies.length) return <Preloader resolve={() => dispatch(loadMovieListRequest())} />;
 
 	return (
 		<StyledMovieContent>
