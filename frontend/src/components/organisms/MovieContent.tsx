@@ -10,7 +10,7 @@ import Span from '../atoms/Span';
 import { RootState } from '../../modules';
 import { loadMovieListRequest } from '../../modules/movie';
 import Modal from './Modal';
-import { Preloader } from '../../PreloadContext';
+import { Preloader } from '../../lib/preloadContext';
 
 interface MovieContentProps {}
 

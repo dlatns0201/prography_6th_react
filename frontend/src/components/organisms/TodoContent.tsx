@@ -23,7 +23,7 @@ import {
 	toggleTodoRequest
 } from '../../modules/todo';
 import Modal from './Modal';
-import { Preloader } from '../../PreloadContext';
+import { Preloader } from '../../lib/preloadContext';
 
 interface TodoContentProps {}
 interface UpdateInputValue {

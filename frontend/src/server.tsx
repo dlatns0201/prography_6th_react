@@ -13,7 +13,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 import App from './App';
 import rootReducer from './modules';
-import PreloadContext from './PreloadContext';
+import PreloadContext from './lib/preloadContext';
 import rootSaga from './sagas';
 import createHtml from './lib/createHtml';
 
