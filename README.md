@@ -9,12 +9,12 @@ pre-task to apply prography
 
 ## Project Structure
     ├── src                    # source files
-        ├── components            # atomic design을 위한 atoms, molecules, organisms
-        ├── pages                 # atomic design을 위한 templates, pages
-        ├── modules               # 상태 관리에 필요한 ducks 구조의 redux action, reducer 
-        ├── sags                  # redux-saga에 필요한 middlewares
-        ├── lib                   # 필요에 따라 만든 모듈들
-        └──  server.tsx           # SSR를 위해 만든 express 기반의 서버
+    │    ├── components            # atomic design을 위한 atoms, molecules, organisms
+    │    ├── pages                 # atomic design을 위한 templates, pages
+    │    ├── modules               # 상태 관리에 필요한 ducks 구조의 redux action, reducer 
+    │    ├── sags                  # redux-saga에 필요한 middlewares
+    │    ├── lib                   # 필요에 따라 만든 모듈들
+    │    └──  server.tsx           # SSR를 위해 만든 express 기반의 서버
     │   
     ├── .eslintignore, estlintrc.js                     # lint에 필요한 파일
     ├── .prettierrc                    # Pritter 설정 파일
@@ -53,7 +53,7 @@ pre-task to apply prography
 ![image](https://user-images.githubusercontent.com/40534721/75904147-04f4c480-5e86-11ea-8fc8-efb0c028ab03.png)
 
 
-** 설계 과정 **
+**설계 과정**
 https://velog.io/@thsoon/%EC%93%B8%EB%95%8C%EC%97%86%EC%9D%B4-%EA%B3%A0%ED%80%84%EC%9D%B8-%ED%88%AC%EB%91%90%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0-FE-2.-%EB%B7%B0-%EC%84%A4%EA%B3%84
 
 
