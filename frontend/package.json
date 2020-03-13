@@ -4,16 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --colors",
-    "build": "webpack -p",
-    "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
-    "lint:fix": "eslint --fix \"./src/**/*.{ts,tsx,js,jsx}\"",
-    "prettier": "prettier --write --config ./.prettierrc './src/**/*.{ts,tsx}'",
-    "build:dev": "rm -rf dist/ set NODE_ENV=development && npm run build:server",
     "build:client": "webpack --env=client --progress --profile --colors",
     "build:server": "webpack --env=server --progress --profile --colors",
-    "start": "npm run build:dev && node ./dist/main.js",
-    "start:wds": "webpack-dev-server --env=dev --profile --colors"
+    "dev:client": "webpack-dev-server --env=client --colors",
+    "dev:server": "rm -rf dist/ set NODE_ENV=development && node ./dist/main.js"
   },
   "keywords": [],
   "author": "TaeHyun Lim",
