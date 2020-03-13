@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -27,17 +27,24 @@ const StyledLoginContent = styled.div`
 			margin-bottom: 0.3em;
 		}
 	}
+
+	@media (max-width: 750px) {
+		min-width: 90%;
+	}
 `;
 
 const LoginContent = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
 	useEffect(() => {}, []);
 
 	return (
 		<StyledLoginContent>
-			<Title>Login</Title>
+			<Title color="#FDA7DF">Login</Title>
 			<Form className="login-form">
-				<Input type="email" placeholder="Email" />
-				<Input type="password" placeholder="Password" />
+				<Input type="email" value={email} setValue={setEmail} placeholder="Email" />
+				<Input type="password" value={password} setValue={setPassword} placeholder="Password" />
 				<Button type="submit">Submit</Button>
 			</Form>
 		</StyledLoginContent>

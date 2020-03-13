@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -27,18 +27,26 @@ const StyledSignupContent = styled.div`
 			margin-bottom: 0.3em;
 		}
 	}
+
+	@media (max-width: 750px) {
+		min-width: 90%;
+	}
 `;
 
 const SignupContent = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [nickname, setNickname] = useState('');
+
 	useEffect(() => {}, []);
 
 	return (
 		<StyledSignupContent>
-			<Title>Signup</Title>
+			<Title color="#FDA7DF">Signup</Title>
 			<Form className="signup-form">
-				<Input type="email" placeholder="Email" />
-				<Input type="password" placeholder="Password" />
-				<Input type="text" placeholder="Nickname" />
+				<Input type="email" value={email} setValue={setEmail} placeholder="Email" />
+				<Input type="password" value={password} setValue={setPassword} placeholder="Password" />
+				<Input type="text" value={nickname} setValue={setNickname} placeholder="Nickname" />
 				<Button type="submit">Submit</Button>
 			</Form>
 		</StyledSignupContent>
