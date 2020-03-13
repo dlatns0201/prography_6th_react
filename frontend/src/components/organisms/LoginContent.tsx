@@ -12,6 +12,7 @@ import Form from '../atoms/Form';
 import Input from '../atoms/Input';
 import Button from '../atoms/Button';
 import Title from '../molecules/Title';
+import { loginRequest } from '../../modules/user';
 
 interface LoginContentProps {}
 
@@ -35,7 +36,7 @@ const StyledLoginContent = styled.div`
 `;
 
 const LoginContent = () => {
-	const { loading } = useSelector((state: RootState) => state.user);
+	const { loading, userInfo } = useSelector((state: RootState) => state.user);
 	const dispatch = useDispatch();
 
 	const [email, setEmail] = useState('');
@@ -44,6 +45,7 @@ const LoginContent = () => {
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent) => {
 			e.preventDefault();
+			dispatch(loginRequest(email, password));
 		},
 		[email, password]
 	);
@@ -52,6 +54,7 @@ const LoginContent = () => {
 
 	return (
 		<StyledLoginContent>
+			{userInfo && <Redirect to="/" />}
 			{loading && loading.login && <Modal dialog={<Title>Loading...</Title>} />}
 			<Title color="#FDA7DF">Login</Title>
 			<Form className="login-form" onSubmit={onSubmitForm}>

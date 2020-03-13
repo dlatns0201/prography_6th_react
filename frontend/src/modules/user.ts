@@ -25,15 +25,6 @@ interface State {
 		email: string;
 		nickname: string;
 	} | null;
-	loginData: {
-		email: string;
-		password: string;
-	} | null;
-	signupData: {
-		email: string;
-		password: string;
-		nickname: string;
-	} | null;
 	loading: {
 		signup: boolean;
 		login: boolean;
@@ -54,8 +45,6 @@ export type Action =
 
 const initialState: State = {
 	userInfo: null,
-	loginData: null,
-	signupData: null,
 	loading: {
 		signup: false,
 		login: false
@@ -94,6 +83,38 @@ function reducer(state: State = initialState, action: Action): State {
 				error: {
 					...state.error,
 					signup: action.error
+				}
+			};
+		}
+		case LOGIN_REQUEST: {
+			return {
+				...state,
+				loading: {
+					...state.loading,
+					login: true
+				}
+			};
+		}
+		case LOGIN_SUCCESS: {
+			return {
+				...state,
+				loading: {
+					...state.loading,
+					login: false
+				},
+				userInfo: action.payload
+			};
+		}
+		case LOGIN_FAILURE: {
+			return {
+				...state,
+				loading: {
+					...state.loading,
+					login: false
+				},
+				error: {
+					...state.error,
+					login: action.error
 				}
 			};
 		}
