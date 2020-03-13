@@ -18,12 +18,6 @@ import LoginPage from './pages/Login';
 // const MoviePage = loadable(() => import('./pages/Movie'));
 // const TodoPage = loadable(() => import('./pages/Todo'));
 
-const AppContainer = styled.div`
-	background-color: #ecf0f1;
-	width: 100vw;
-	min-height: 100vh;
-`;
-
 const sagaMiddleware = createSaga();
 const middlewares = [sagaMiddleware];
 const enhancer = compose(composeWithDevTools(applyMiddleware(...middlewares)));
@@ -33,16 +27,14 @@ sagaMiddleware.run(rootSaga);
 const App = () => {
 	return (
 		<Provider store={store}>
-			<AppContainer>
-				<Navigation />
-				<Switch>
-					<Route path="/movie" component={MoviePage} />
-					<Route exact path="/" component={TodoPage} />
-					<Route exact path="/login" component={LoginPage} />
-					<Route exact path="/signup" component={SignupPage} />
-					<Route path="/" render={() => <div>404 Not Found</div>} />
-				</Switch>
-			</AppContainer>
+			<Navigation />
+			<Switch>
+				<Route path="/movie" component={MoviePage} />
+				<Route exact path="/" component={TodoPage} />
+				<Route exact path="/login" component={LoginPage} />
+				<Route exact path="/signup" component={SignupPage} />
+				<Route path="/" render={() => <div>404 Not Found</div>} />
+			</Switch>
 		</Provider>
 	);
 };
