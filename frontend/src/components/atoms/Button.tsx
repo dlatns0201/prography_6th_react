@@ -8,7 +8,7 @@ interface ButtonProps {
 	flex?: number | 'auto';
 	color?: string;
 	size?: 'small' | 'normal' | 'big';
-	type?: 'link' | 'button';
+	type?: 'link' | 'button' | 'submit';
 	url?: string;
 	outline?: string;
 	bgColor?: string;

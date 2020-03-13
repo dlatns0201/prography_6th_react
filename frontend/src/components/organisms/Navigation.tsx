@@ -43,6 +43,12 @@ const Navigation = () => {
 				<Button type="link" url="/movie" outline="none">
 					Movie
 				</Button>
+				<Button type="link" url="/login" outline="none">
+					Login
+				</Button>
+				<Button type="link" url="/signup" outline="none">
+					Signup
+				</Button>
 			</ButtonList>
 		</StyledNavigation>
 	);
