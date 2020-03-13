@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // eslint-disable-next-line no-unused-vars
@@ -34,15 +35,26 @@ const StyledLoginContent = styled.div`
 `;
 
 const LoginContent = () => {
+	const { loading } = useSelector((state: RootState) => state.user);
+	const dispatch = useDispatch();
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const onSubmitForm = useCallback(
+		(e: React.FormEvent) => {
+			e.preventDefault();
+		},
+		[email, password]
+	);
 
 	useEffect(() => {}, []);
 
 	return (
 		<StyledLoginContent>
+			{loading && loading.login && <Modal dialog={<Title>Loading...</Title>} />}
 			<Title color="#FDA7DF">Login</Title>
-			<Form className="login-form">
+			<Form className="login-form" onSubmit={onSubmitForm}>
 				<Input type="email" value={email} setValue={setEmail} placeholder="Email" />
 				<Input type="password" value={password} setValue={setPassword} placeholder="Password" />
 				<Button type="submit">Submit</Button>
