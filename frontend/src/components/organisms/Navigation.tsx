@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../modules';
 
 interface NavigationProps {}
 
@@ -31,6 +33,8 @@ const StyledNavigation = styled.div`
 `;
 
 const Navigation = () => {
+	const { userInfo } = useSelector((state: RootState) => state.user);
+
 	return (
 		<StyledNavigation>
 			<Span size="big" className="nav-title">
@@ -43,12 +47,18 @@ const Navigation = () => {
 				<Button type="link" url="/movie" outline="none">
 					Movie
 				</Button>
-				<Button type="link" url="/login" outline="none">
-					Login
-				</Button>
-				<Button type="link" url="/signup" outline="none">
-					Signup
-				</Button>
+				{userInfo ? (
+					<Span>{userInfo.nickname}</Span>
+				) : (
+					<>
+						<Button type="link" url="/login" outline="none">
+							Login
+						</Button>
+						<Button type="link" url="/signup" outline="none">
+							Signup
+						</Button>
+					</>
+				)}
 			</ButtonList>
 		</StyledNavigation>
 	);
