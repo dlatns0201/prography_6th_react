@@ -13,12 +13,17 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async signup(userInfo: {
+  async create(userInfo: {
     email: string;
     password: string;
     nickname: string;
   }) {
-    const result = await this.userRepository.save(userInfo);
-    return result;
+    try {
+      const result = await this.userRepository.save(userInfo);
+      return result;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   }
 }

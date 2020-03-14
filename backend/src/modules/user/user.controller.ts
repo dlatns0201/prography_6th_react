@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Res } from '@nestjs/common';
 import { UserService } from './user.service';
+import { Response } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -11,8 +12,9 @@ export class UserController {
   }
 
   @Post('/signup')
-  signup(@Body() body) {
-    const result = this.userService.signup(body);
-    return result;
+  async signup(@Body() body, @Res() res: Response) {
+    const result = await this.userService.create(body);
+    if (result) res.sendStatus(201);
+    else res.sendStatus(403);
   }
 }
