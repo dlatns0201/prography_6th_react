@@ -11,9 +11,7 @@ import {
 import axios from 'axios';
 
 const signupAPI = (payload: { email: string; password: string; nickname: string }) =>
-	new Promise(resolve => {
-		resolve();
-	});
+	axios.post('/user/signup', payload);
 const loginAPI = (payload: { email: string; password: string }) =>
 	new Promise(resolve => {
 		resolve({
