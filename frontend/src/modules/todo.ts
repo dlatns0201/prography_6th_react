@@ -7,7 +7,7 @@ export interface Todo {
 
 interface State {
 	loading: boolean;
-	todos: Todo[];
+	todos: Todo[] | null;
 }
 
 export const LOAD_TODOS_REQUEST = 'todo/LOAD_TODOS_REQUEST' as const;
@@ -32,7 +32,7 @@ export const TOGGLE_TODO_REQUEST = 'todo/TOGGLE_TODO_REQUEST' as const;
 export const TOGGLE_TODO_SUCCESS = 'todo/TOGGLE_TODO_SUCCESS' as const;
 export const TOGGLE_TODO_FAILURE = 'todo/TOGGLE_TODO_FAILURE' as const;
 
-export const loadTodosRequest = (savedTodos: Todo[]) => ({ type: LOAD_TODOS_REQUEST, savedTodos });
+export const loadTodosRequest = () => ({ type: LOAD_TODOS_REQUEST });
 export const loadTodosSuccess = (todos: Todo[]) => ({ type: LOAD_TODOS_SUCCESS, todos });
 export const loadTodosFailure = (error: Error) => ({ type: LOAD_TODOS_FAILURE, error });
 
@@ -74,7 +74,7 @@ export type Action =
 
 const initialState: State = {
 	loading: false,
-	todos: []
+	todos: null
 };
 
 function reducer(state: State = initialState, action: Action) {
@@ -99,28 +99,28 @@ function reducer(state: State = initialState, action: Action) {
 		case INSERT_TODO_SUCCESS: {
 			return {
 				...state,
-				todos: state.todos.concat(action.todo),
+				todos: state.todos!.concat(action.todo),
 				loading: false
 			};
 		}
 		case UPDATE_TODO_SUCCESS: {
 			return {
 				...state,
-				todos: state.todos.map(v => (v.id === action.todo.id ? action.todo : v)),
+				todos: state.todos!.map(v => (v.id === action.todo.id ? action.todo : v)),
 				loading: false
 			};
 		}
 		case DELETE_TODO_SUCCESS: {
 			return {
 				...state,
-				todos: state.todos.filter(v => v.id !== action.id),
+				todos: state.todos!.filter(v => v.id !== action.id),
 				loading: false
 			};
 		}
 		case TOGGLE_TODO_SUCCESS: {
 			return {
 				...state,
-				todos: state.todos.map(v => (v.id === action.todo.id ? action.todo : v)),
+				todos: state.todos!.map(v => (v.id === action.todo.id ? action.todo : v)),
 				loading: false
 			};
 		}
@@ -136,7 +136,7 @@ function reducer(state: State = initialState, action: Action) {
 			};
 		}
 		case CHANGE_TO_INPUT: {
-			const todos = state.todos.map(todo => (todo.id === action.id ? { ...todo, writeMode: true } : todo));
+			const todos = state.todos!.map(todo => (todo.id === action.id ? { ...todo, writeMode: true } : todo));
 			return {
 				...state,
 				todos

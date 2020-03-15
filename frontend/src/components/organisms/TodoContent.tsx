@@ -128,6 +128,7 @@ const TodoContent = () => {
 
 	const todoItems = useMemo(
 		() =>
+			todos &&
 			todos.map(v => (
 				<ListItem key={v.id} hr className="todo-list-item">
 					{v.writeMode ? (
@@ -160,8 +161,8 @@ const TodoContent = () => {
 	);
 
 	useEffect(() => {
-		if (!todos.length) dispatch(loadTodosRequest(todos));
-	}, []);
+		if (!todos) dispatch(loadTodosRequest());
+	}, [userInfo?.email]);
 
 	// if (!todos.length)
 	// 	return (
