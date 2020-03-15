@@ -1,4 +1,15 @@
-import { Controller, Get, Req, UseGuards, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Req,
+  UseGuards,
+  Post,
+  Body,
+  Delete,
+  Param,
+  HttpCode,
+  Patch,
+} from '@nestjs/common';
 import { AuthenticatedGuard } from '../../common/authenticated.guard';
 import { Request } from 'express';
 import { TodoService } from './todo.service';
@@ -21,5 +32,12 @@ export class TodoController {
     const description = req.body.description;
     const result = this.todoService.createTodo(userId, description);
     return result;
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Delete('/:id')
+  @HttpCode(204)
+  async deleteTodo(@Param('id') id: string) {
+    await this.todoService.deleteTodo(id);
   }
 }

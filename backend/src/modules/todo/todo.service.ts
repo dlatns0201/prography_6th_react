@@ -13,12 +13,12 @@ export class TodoService {
 
   async getTodosByUserId(id: string) {
     const result = await this.todoRepository.find({
-      relations: ['User'],
       where: {
         User: { id },
       },
       select: ['id', 'description', 'done'],
     });
+
     return result;
   }
 
@@ -30,5 +30,9 @@ export class TodoService {
     });
     const { id, done } = await this.todoRepository.save(todo);
     return { id, description, done };
+  }
+
+  deleteTodo(todoId: string) {
+    return this.todoRepository.delete({ id: todoId });
   }
 }
