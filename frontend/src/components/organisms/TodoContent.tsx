@@ -1,6 +1,7 @@
 import React, { useState, useCallback, memo, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Title from '../molecules/Title';
 import Form from '../atoms/Form';
@@ -83,10 +84,12 @@ const StyledTodoContent = styled.div`
 `;
 
 const TodoContent = () => {
+	const { todos, loading } = useSelector((state: RootState) => state.todo);
+	const { userInfo } = useSelector((state: RootState) => state.user);
+	const dispatch = useDispatch();
+
 	const [insertInputValue, setInsertInputValue] = useState('');
 	const [updateInputValues, setUpdateInputValues] = useState<UpdateInputValue>({});
-	const { todos, loading } = useSelector((state: RootState) => state.todo);
-	const dispatch = useDispatch();
 
 	const onSubmitForm = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
@@ -160,16 +163,17 @@ const TodoContent = () => {
 		if (!todos.length) dispatch(loadTodosRequest(todos));
 	}, []);
 
-	if (!todos.length)
-		return (
-			<>
-				{loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : null}
-				<Preloader resolve={() => dispatch(loadTodosRequest([]))} />
-			</>
-		);
+	// if (!todos.length)
+	// 	return (
+	// 		<>
+	// 			{loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : null}
+	// 			<Preloader resolve={() => dispatch(loadTodosRequest([]))} />
+	// 		</>
+	// );
 
 	return (
 		<StyledTodoContent>
+			{!userInfo && <Redirect to="/login" />}
 			<Title color="#FDA7DF">Todos</Title>
 			<Form flexDirection="column" className="todo-form" onSubmit={onSubmitForm}>
 				<Input
@@ -179,7 +183,7 @@ const TodoContent = () => {
 					setValue={setInsertInputValue}
 				/>
 			</Form>
-			{loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : null}
+			{userInfo && (loading ? <Modal dialog={<Span size="title">Loading...</Span>} /> : null)}
 			<List white listHeight="66px">
 				{todoItems}
 			</List>
