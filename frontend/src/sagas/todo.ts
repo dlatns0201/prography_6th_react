@@ -1,5 +1,6 @@
 import { takeLatest, all, fork, put, takeEvery } from 'redux-saga/effects';
-import { v4 as uuid } from 'uuid';
+import axios from 'axios';
+
 import {
 	LOAD_TODOS_REQUEST,
 	INSERT_TODO_REQUEST,
@@ -40,39 +41,21 @@ const storedData = [
 	}
 ];
 
-const loadTodosAPI = (savedTodos: Todo[]) =>
-	// axios
-	new Promise(resolve => {
-		setTimeout(() => {
-			const loadedData = savedTodos.length ? savedTodos : storedData;
-			resolve(loadedData);
-		}, 1000);
-	});
+const loadTodosAPI = () => axios.get('/todo');
+
 function* loadTodos(action: ReturnType<typeof loadTodosRequest>) {
 	try {
-		const todos = yield loadTodosAPI(action.savedTodos);
+		const todos = yield loadTodosAPI();
 		yield put(loadTodosSuccess(todos));
 	} catch (e) {
 		yield put(loadTodosFailure(e));
 	}
 }
 
-const insertTodoAPI = (text: string) =>
-	// axios
-	new Promise(resolve => {
-		setTimeout(() => {
-			const uid = uuid();
-			const todo = {
-				id: uid,
-				text
-			};
-			resolve(todo);
-		}, 230);
-	});
+const insertTodoAPI = (description: string) => axios.post('/todo', { description });
 function* insertTodo(action: ReturnType<typeof insertTodoRequest>) {
 	try {
 		const todo = yield insertTodoAPI(action.text);
-		todo.done = false;
 		todo.writeMode = false;
 
 		yield put(insertTodoSuccess(todo));
