@@ -12,9 +12,12 @@ import {
 import { UserService } from './user.service';
 import { Response } from 'express';
 import { LoginGuard } from 'src/common/login.guard';
+import { AuthenticatedGuard } from 'src/common/authenticated.guard';
 
 interface Request {
   user?: any;
+  logout: any;
+  session?: any;
 }
 
 @Controller('user')
@@ -22,8 +25,9 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('/')
-  findAll() {
-    return this.userService.findAll();
+  getUserInfo(@Req() req: Request, @Res() res: Response) {
+    if (req.user) res.json(req.user);
+    else res.sendStatus(401);
   }
 
   @Post('/signup')
@@ -35,7 +39,6 @@ export class UserController {
 
   @UseGuards(LoginGuard)
   @Post('/login')
-  @HttpCode(200)
   async login(@Req() req: Request): Promise<any> {
     const { id, email, nickname } = await this.userService.findById(req.user);
     return {
@@ -43,5 +46,14 @@ export class UserController {
       email,
       nickname,
     };
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Post('/logout')
+  logout(@Req() req: Request, @Res() res: Response) {
+    req.logout();
+    req.session.destroy();
+    res.clearCookie('pgsid');
+    res.sendStatus(200);
   }
 }
