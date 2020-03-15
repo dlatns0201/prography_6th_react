@@ -48,4 +48,14 @@ export class TodoController {
     const result = await this.todoService.updateTodo({ id, done: booleanDone });
     return result;
   }
+
+  @UseGuards(AuthenticatedGuard)
+  @Patch('/:id/description/:description')
+  async changeDescription(
+    @Param('id') id: string,
+    @Param('description') description: string,
+  ) {
+    const result = await this.todoService.updateTodo({ id, description });
+    return result;
+  }
 }
