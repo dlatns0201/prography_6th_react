@@ -11,6 +11,7 @@ import Input from '../atoms/Input';
 import Button from '../atoms/Button';
 import Title from '../molecules/Title';
 import { signupRequest } from '../../modules/user';
+import { Redirect } from 'react-router-dom';
 
 interface SignupContentProps {}
 
@@ -34,7 +35,7 @@ const StyledSignupContent = styled.div`
 `;
 
 const SignupContent = () => {
-	const { loading } = useSelector((state: RootState) => state.user);
+	const { loading, userInfo } = useSelector((state: RootState) => state.user);
 	const dispatch = useDispatch();
 
 	const [email, setEmail] = useState('');
@@ -49,10 +50,9 @@ const SignupContent = () => {
 		[email, password, nickname]
 	);
 
-	useEffect(() => {}, []);
-
 	return (
 		<StyledSignupContent>
+			{userInfo && <Redirect to="/" />}
 			{loading && loading.signup && <Modal dialog={<Title>Loading...</Title>} />}
 			<Title color="#FDA7DF">Signup</Title>
 			<Form className="signup-form" onSubmit={onSubmitForm}>
