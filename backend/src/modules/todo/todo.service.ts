@@ -8,10 +8,14 @@ import { User } from '../../entity/user';
 export class TodoService {
   constructor(
     @Inject('TODO_REPOSITORY') private todoRepository: Repository<Todo>,
-    @Inject('USER_REPOSITORY') private userRepository: Repository<User>,
   ) {}
 
   getTodosByUserId(id: string) {
-    return this.userRepository.find({ where: { id }, relations: ['Todos'] });
+    return this.todoRepository.find({
+      relations: ['User'],
+      where: {
+        User: { id },
+      },
+    });
   }
 }
