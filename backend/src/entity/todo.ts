@@ -22,6 +22,9 @@ export class Todo {
   @Column({ nullable: false })
   description: string;
 
+  @Column({ nullable: false, default: false })
+  done: string;
+
   @OneToMany(
     type => User,
     user => user.Todos,
