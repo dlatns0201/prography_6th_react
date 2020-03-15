@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+
 import Span from '../atoms/Span';
 import ButtonList from '../molecules/ButtonList';
 import Button from '../atoms/Button';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
+import { logoutRequest } from '../../modules/user';
 
 interface NavigationProps {}
 
@@ -34,6 +36,11 @@ const StyledNavigation = styled.div`
 
 const Navigation = () => {
 	const { userInfo } = useSelector((state: RootState) => state.user);
+	const dispatch = useDispatch();
+
+	const onLogout = useCallback(() => {
+		dispatch(logoutRequest());
+	}, []);
 
 	return (
 		<StyledNavigation>
@@ -48,7 +55,12 @@ const Navigation = () => {
 					Movie
 				</Button>
 				{userInfo ? (
-					<Span>{userInfo.nickname}</Span>
+					<>
+						<Span>{userInfo.nickname}</Span>
+						<Button outline="none" onClick={onLogout}>
+							Logout
+						</Button>
+					</>
 				) : (
 					<>
 						<Button type="link" url="/login" outline="none">
