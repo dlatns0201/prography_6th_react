@@ -81,34 +81,25 @@ function* updateTodo(action: ReturnType<typeof updateTodoRequest>) {
 	}
 }
 
-const deleteTodoAPI = (id: string) =>
-	// axios
-	new Promise(resolve => {
-		setTimeout(() => {
-			resolve(id);
-		}, 230);
-	});
+const deleteTodoAPI = (id: string) => axios.delete(`/todo/${id}`);
 function* deleteTodo(action: ReturnType<typeof deleteTodoRequest>) {
 	try {
-		const deletedId = yield deleteTodoAPI(action.id);
-		yield put(deleteTodoSuccess(deletedId));
+		yield deleteTodoAPI(action.id);
+		yield put(deleteTodoSuccess(action.id));
 	} catch (e) {
 		yield put(deleteTodoFailure(e));
 	}
 }
 
-const toggleTodoDoneAPI = (todo: Todo) =>
-	new Promise(resolve => {
-		setTimeout(() => {
-			const changedTodo = { ...todo };
-			changedTodo.done = !changedTodo.done;
-			resolve(changedTodo);
-		}, 230);
-	});
+const toggleTodoDoneAPI = (id: string, done: boolean) => axios.patch(`/todo/${id}/done/${done}`);
+
 function* toggleTodoDone(action: ReturnType<typeof toggleTodoRequest>) {
 	try {
-		const changedTodo = yield toggleTodoDoneAPI(action.todo);
-		yield put(toggleTodoSuccess(changedTodo));
+		const { id, done } = action.payload;
+		const { data } = yield toggleTodoDoneAPI(id, !done);
+		data.writeMode = false;
+		console.log(data.done);
+		yield put(toggleTodoSuccess(data));
 	} catch (e) {
 		yield put(toggleTodoFAILURE(e));
 	}

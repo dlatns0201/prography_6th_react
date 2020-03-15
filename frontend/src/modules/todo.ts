@@ -50,7 +50,7 @@ export const deleteTodoRequest = (id: string) => ({ type: DELETE_TODO_REQUEST, i
 export const deleteTodoSuccess = (id: string) => ({ type: DELETE_TODO_SUCCESS, id });
 export const deleteTodoFailure = (error: Error) => ({ type: DELETE_TODO_FAILURE, error });
 
-export const toggleTodoRequest = (todo: Todo) => ({ type: TOGGLE_TODO_REQUEST, todo });
+export const toggleTodoRequest = (id: string, done: boolean) => ({ type: TOGGLE_TODO_REQUEST, payload: { id, done } });
 export const toggleTodoSuccess = (todo: Todo) => ({ type: TOGGLE_TODO_SUCCESS, todo });
 export const toggleTodoFAILURE = (error: Error) => ({ type: TOGGLE_TODO_FAILURE, error });
 

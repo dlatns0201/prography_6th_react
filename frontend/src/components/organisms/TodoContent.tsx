@@ -120,8 +120,8 @@ const TodoContent = () => {
 		[]
 	);
 	const onToggleDone = useCallback(
-		(todo: Todo) => () => {
-			dispatch(toggleTodoRequest(todo));
+		(id: string, done: boolean) => () => {
+			dispatch(toggleTodoRequest(id, done));
 		},
 		[]
 	);
@@ -141,7 +141,7 @@ const TodoContent = () => {
 						/>
 					) : (
 						<>
-							<Span className="todo-description" del={v.done} onClick={onToggleDone(v)}>
+							<Span className="todo-description" del={v.done} onClick={onToggleDone(v.id, v.done)}>
 								{v.description}
 							</Span>
 
