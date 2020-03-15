@@ -21,4 +21,14 @@ export class TodoService {
     });
     return result;
   }
+
+  async createTodo(userId: string, description: string) {
+    const user = await this.userRepository.findOne({ id: userId });
+    const todo = await this.todoRepository.create({
+      description,
+      User: user,
+    });
+    const { id, done } = await this.todoRepository.save(todo);
+    return { id, description, done };
+  }
 }
