@@ -2,7 +2,7 @@ import { takeLatest, all, fork, put } from 'redux-saga/effects';
 import axios from 'axios';
 import { LOAD_MOVIE_LIST_REQUEST, loadMovieListSuccess, loadMovieListFailure } from '../modules/movie';
 
-const loadMoviesAPI = () => axios.get('https://yts.mx/api/v2/list_movies.json?limit=50');
+const loadMoviesAPI = () => axios.get('https://yts.mx/api/v2/list_movies.json?limit=50', { withCredentials: false });
 function* loadMovies() {
 	try {
 		const { data: loadedData } = yield loadMoviesAPI();
