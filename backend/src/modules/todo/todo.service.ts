@@ -35,4 +35,13 @@ export class TodoService {
   deleteTodo(todoId: string) {
     return this.todoRepository.delete({ id: todoId });
   }
+
+  async updateTodo(payload: any) {
+    const todo = await this.todoRepository.findOne({ id: payload.id });
+    const { id, description, done } = await this.todoRepository.save({
+      ...todo,
+      ...payload,
+    });
+    return { id, description, done };
+  }
 }

@@ -40,4 +40,12 @@ export class TodoController {
   async deleteTodo(@Param('id') id: string) {
     await this.todoService.deleteTodo(id);
   }
+
+  @UseGuards(AuthenticatedGuard)
+  @Patch('/:id/done/:done')
+  async toggleTodo(@Param('id') id: string, @Param('done') done: string) {
+    const booleanDone = done === 'true' ? true : false;
+    const result = await this.todoService.updateTodo({ id, done: booleanDone });
+    return result;
+  }
 }
