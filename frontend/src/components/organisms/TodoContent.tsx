@@ -114,8 +114,8 @@ const TodoContent = () => {
 		[updateInputValues]
 	);
 	const onEnter = useCallback(
-		(id: string, description: string, done: boolean) => (e: React.KeyboardEvent<HTMLInputElement>) => {
-			if (e.key === 'Enter') dispatch(updateTodoRequest({ id, description, writeMode: false, done }));
+		(id: string, description: string) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (e.key === 'Enter') dispatch(updateTodoRequest(id, description));
 		},
 		[]
 	);
@@ -135,7 +135,7 @@ const TodoContent = () => {
 						<Input
 							className="todo-description todo-update-input"
 							onChange={onChangeInput(v.id)}
-							onKeyDown={onEnter(v.id, updateInputValues[v.id], v.done)}
+							onKeyDown={onEnter(v.id, updateInputValues[v.id])}
 							value={updateInputValues[v.id]}
 							size="big"
 						/>

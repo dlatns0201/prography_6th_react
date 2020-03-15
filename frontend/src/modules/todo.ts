@@ -42,7 +42,10 @@ export const insertTodoFailure = (error: Error) => ({ type: INSERT_TODO_FAILURE,
 
 export const changeToInput = (id: string) => ({ type: CHANGE_TO_INPUT, id });
 
-export const updateTodoRequest = (todo: Todo) => ({ type: UPDATE_TODO_REQUEST, todo });
+export const updateTodoRequest = (id: string, description: string) => ({
+	type: UPDATE_TODO_REQUEST,
+	payload: { id, description }
+});
 export const updateTodoSuccess = (todo: Todo) => ({ type: UPDATE_TODO_SUCCESS, todo });
 export const updateTodoFailure = (error: Error) => ({ type: UPDATE_TODO_FAILURE, error });
 

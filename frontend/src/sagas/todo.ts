@@ -65,17 +65,12 @@ function* insertTodo(action: ReturnType<typeof insertTodoRequest>) {
 	}
 }
 
-const updateTodoAPI = (todo: Todo) =>
-	// axios
-	new Promise(resolve => {
-		setTimeout(() => {
-			resolve(todo);
-		}, 230);
-	});
+const updateTodoAPI = (id: string, description: string) => axios.patch(`/todo/${id}/description/${description}`);
 function* updateTodo(action: ReturnType<typeof updateTodoRequest>) {
 	try {
-		const todo = yield updateTodoAPI(action.todo);
-		yield put(updateTodoSuccess(todo));
+		const { id, description } = action.payload;
+		const { data } = yield updateTodoAPI(id, description);
+		yield put(updateTodoSuccess(data));
 	} catch (e) {
 		yield put(updateTodoFailure(e));
 	}
