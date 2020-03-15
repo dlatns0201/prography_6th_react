@@ -6,6 +6,8 @@ import {
   Column,
   ManyToOne,
   JoinTable,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Todo } from './todo';
 
@@ -29,9 +31,12 @@ export class User {
   @Column({ nullable: false })
   nickname: string;
 
-  @ManyToOne(
+  @OneToMany(
     type => Todo,
     todo => todo.User,
+    {
+      cascade: true,
+    },
   )
   Todos: Todo[];
 }

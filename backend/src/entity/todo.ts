@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { User } from './user';
 
@@ -23,11 +25,15 @@ export class Todo {
   description: string;
 
   @Column({ nullable: false, default: false })
-  done: string;
+  done: boolean;
 
-  @OneToMany(
+  @ManyToOne(
     type => User,
     user => user.Todos,
+    {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
   )
   User: User;
 }
