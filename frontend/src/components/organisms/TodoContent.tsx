@@ -114,8 +114,8 @@ const TodoContent = () => {
 		[updateInputValues]
 	);
 	const onEnter = useCallback(
-		(id: string, text: string, done: boolean) => (e: React.KeyboardEvent<HTMLInputElement>) => {
-			if (e.key === 'Enter') dispatch(updateTodoRequest({ id, text, writeMode: false, done }));
+		(id: string, description: string, done: boolean) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (e.key === 'Enter') dispatch(updateTodoRequest({ id, description, writeMode: false, done }));
 		},
 		[]
 	);
@@ -142,11 +142,11 @@ const TodoContent = () => {
 					) : (
 						<>
 							<Span className="todo-description" del={v.done} onClick={onToggleDone(v)}>
-								{v.text}
+								{v.description}
 							</Span>
 
 							<ButtonList className="todo-buttons">
-								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id, v.text)}>
+								<Button color="blue" outline="none" transparent onClick={onChangeToInput(v.id, v.description)}>
 									수정
 								</Button>
 								<Button color="#FDA7DF" outline="none" transparent onClick={onDeleteItem(v.id)}>

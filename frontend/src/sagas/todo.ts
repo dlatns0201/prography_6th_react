@@ -45,8 +45,9 @@ const loadTodosAPI = () => axios.get('/todo');
 
 function* loadTodos(action: ReturnType<typeof loadTodosRequest>) {
 	try {
-		const todos = yield loadTodosAPI();
-		yield put(loadTodosSuccess(todos));
+		const { data } = yield loadTodosAPI();
+		data.forEach((todo: Todo) => Object.assign(todo, { writeMode: false }));
+		yield put(loadTodosSuccess(data));
 	} catch (e) {
 		yield put(loadTodosFailure(e));
 	}
@@ -55,10 +56,10 @@ function* loadTodos(action: ReturnType<typeof loadTodosRequest>) {
 const insertTodoAPI = (description: string) => axios.post('/todo', { description });
 function* insertTodo(action: ReturnType<typeof insertTodoRequest>) {
 	try {
-		const todo = yield insertTodoAPI(action.text);
-		todo.writeMode = false;
+		const { data } = yield insertTodoAPI(action.text);
+		data.writeMode = false;
 
-		yield put(insertTodoSuccess(todo));
+		yield put(insertTodoSuccess(data));
 	} catch (e) {
 		yield put(insertTodoFailure(e));
 	}
